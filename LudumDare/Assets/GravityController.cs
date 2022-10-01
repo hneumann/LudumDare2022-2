@@ -90,7 +90,7 @@ public class GravityController : MonoBehaviour
     }
 
     private void ModifyGravity() {
-        Physics.gravity = new Vector3(0f , _gravityForce, 0f);
+        Physics2D.gravity = new Vector2(0f , _gravityForce);
     }
 
 }

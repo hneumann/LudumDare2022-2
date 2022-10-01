@@ -28,6 +28,7 @@ public class BumblebeeController : MonoBehaviour
 
         var force = Vector2.up * verticalForce;
         rigidbody.AddForce(force, ForceMode2D.Impulse);
+        
         rigidbody.velocity = Vector2.up * Mathf.Clamp(rigidbody.velocity.y, -maxVerticalVelocity, maxVerticalVelocity);
     }
 }
