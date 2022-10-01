@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cycleTime: 10
-  _breatheForce: 7.5
+  _breatheForce: 6
   _breatheRythm:
     serializedVersion: 2
     m_Curve:
