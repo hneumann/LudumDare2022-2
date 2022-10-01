@@ -251,7 +251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 45196587871831297, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 45196587871831297, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -322,14 +322,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
-      propertyPath: SubModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
-      propertyPath: TrailModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: ShapeModule.arc.mode
       value: 0
       objectReference: {fileID: 0}
@@ -360,10 +352,6 @@ PrefabInstance:
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: VelocityModule.x.scalar
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
-      propertyPath: CustomDataModule.enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: ShapeModule.m_Position.y
@@ -402,10 +390,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
-      propertyPath: ExternalForcesModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: ShapeModule.alignToDirection
       value: 0
       objectReference: {fileID: 0}
@@ -428,10 +412,6 @@ PrefabInstance:
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: VelocityModule.z.minMaxState
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
-      propertyPath: InheritVelocityModule.enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4342472696918273336, guid: 12b7b346ae9882a4c87e8da8a7d2f9ed, type: 3}
       propertyPath: VelocityModule.orbitalX.scalar
