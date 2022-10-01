@@ -10,9 +10,9 @@ public class MonkController : MonoBehaviour
 
     void Start()
     {
-        outMonks.SetActive(false);
+        outMonks.SetActive(true);
         idleMonks.SetActive(false);
-        inMonks.SetActive(true);
+        inMonks.SetActive(false);
     }
 
     //TODO switch monks really correctly
@@ -22,15 +22,15 @@ public class MonkController : MonoBehaviour
 
         if (ones % 5 is 0 or 5)
         {
-            idleMonks.SetActive(true);
+            idleMonks.SetActive(false);
             outMonks.SetActive(false);
-            inMonks.SetActive(false);
+            inMonks.SetActive(true);
             return;
         }
 
         idleMonks.SetActive(false);
-        inMonks.SetActive(ones < 5);
-        outMonks.SetActive(ones > 5);
+        inMonks.SetActive(ones > 5);
+        outMonks.SetActive(ones < 5);
         
     }
     

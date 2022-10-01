@@ -47,12 +47,7 @@ public class BumblebeeController : MonoBehaviour
             } else {
                 verticalForce = verticalValue * forceFactor;
                 horizontalForce = horizontalValue * forceFactor;
-                if (verticalForce != 0 || horizontalForce != 0) {
-                    Debug.Log("vertical: " + verticalForce + " horizontal: " + horizontalForce);
-                }
-
             }
-
 
             var force = Vector2.up * verticalForce + Vector2.right * horizontalForce;
             //Debug.Log("force: " + force);
