@@ -15,6 +15,7 @@ public class MonkController : MonoBehaviour
         inMonks.SetActive(true);
     }
 
+    //TODO switch monks really correctly
     private void Update()
     {
         var ones = Mathf.RoundToInt(Time.time) % 10;
@@ -32,5 +33,5 @@ public class MonkController : MonoBehaviour
         outMonks.SetActive(ones > 5);
         
     }
-    //TODO switch monks correctly
+    
 }
