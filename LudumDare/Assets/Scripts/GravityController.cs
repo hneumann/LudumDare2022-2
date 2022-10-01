@@ -13,17 +13,18 @@ public class GravityController : MonoBehaviour
 
     private bool _playing = false;
 
+    [SerializeField] private GameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
-        _playing = true;
         ModifyGravity(0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_playing) {
+        if(gameController.GetState() == GameController.GameState.playing) {
             _gravityForce = _breatheRythm.Evaluate((_timer % _cycleTime)/_cycleTime) * _breatheForce;
             _timer += Time.deltaTime;
             ModifyGravity(_gravityForce);
