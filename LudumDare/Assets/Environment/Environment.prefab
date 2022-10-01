@@ -92,8 +92,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 8033245750104793155, guid: f5a12d3bb804d2e47bd6b2898a21163a, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2716752044267394826}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5a12d3bb804d2e47bd6b2898a21163a, type: 3}
+--- !u!4 &2716752044267394826 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2538196490903603322, guid: f5a12d3bb804d2e47bd6b2898a21163a, type: 3}
+  m_PrefabInstance: {fileID: 471378045268926320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7634016601792429872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8033245750104793152, guid: f5a12d3bb804d2e47bd6b2898a21163a, type: 3}
@@ -106,6 +115,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 471378045742545670}
     m_Modifications:
+    - target: {fileID: 2992234956887226110, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 471378046362200768}
     - target: {fileID: 2992234956931703978, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: m_Name
       value: AlltheMonks
@@ -150,11 +163,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3258695730015014188, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 159051517795651858}
+    - target: {fileID: 9063311821276864535, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 5965998573674609705}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+--- !u!4 &159051517795651858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3258695729372240238, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+  m_PrefabInstance: {fileID: 3390126415564425340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &471378044931108049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2992234956931703981, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+  m_PrefabInstance: {fileID: 3390126415564425340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &471378046362200768 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2992234955233616572, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+  m_PrefabInstance: {fileID: 3390126415564425340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5965998573674609705 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9063311819556156501, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
   m_PrefabInstance: {fileID: 3390126415564425340}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3989133499871302343
@@ -398,8 +434,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sky
       objectReference: {fileID: 0}
+    - target: {fileID: 3004184028024815047, guid: f6969be5a8e0e8f40952f11fb785becc, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 6869631031210252320}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6969be5a8e0e8f40952f11fb785becc, type: 3}
+--- !u!4 &6869631031210252320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3004184026500023521, guid: f6969be5a8e0e8f40952f11fb785becc, type: 3}
+  m_PrefabInstance: {fileID: 8567205977829825729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6869631031666041089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3004184028024815040, guid: f6969be5a8e0e8f40952f11fb785becc, type: 3}

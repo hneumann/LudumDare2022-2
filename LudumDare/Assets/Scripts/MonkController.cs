@@ -1,5 +1,3 @@
-
-using System;
 using UnityEngine;
 
 public class MonkController : MonoBehaviour
@@ -29,8 +27,8 @@ public class MonkController : MonoBehaviour
         }
 
         idleMonks.SetActive(false);
-        inMonks.SetActive(ones < 5);
-        outMonks.SetActive(ones > 5);
+        inMonks.SetActive(ones > 5);
+        outMonks.SetActive(ones < 5);
         
     }
     
