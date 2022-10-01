@@ -37,8 +37,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _state = GameState.playing;
         _shopSpawnTimer = _shopSpawnTime;
+        StartGame();
     }
 
     // Update is called once per frame
@@ -85,9 +85,11 @@ public class GameController : MonoBehaviour
                     break;
                 case GameState.playing:
                     Time.timeScale = 1f;
+                    shopUI.gameObject.SetActive(false);
                     break;
                 case GameState.shopping:
                     Time.timeScale = 0.01f;
+                    shopUI.gameObject.SetActive(true);
                     break;
             }
         }
@@ -103,12 +105,10 @@ public class GameController : MonoBehaviour
     public void StartShopping(ShopObjectController shop) {
         State = GameState.shopping;
         _shopObject = shop;
-        shopUI.gameObject.SetActive(true);
     }
 
     public void StopShopping() {
         State = GameState.playing;
         _shopObject.CloseShop();
-        shopUI.gameObject.SetActive(false);
     }
 }
