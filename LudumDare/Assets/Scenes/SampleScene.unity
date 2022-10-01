@@ -315,9 +315,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5255569673691457122, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255569673691457122, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5255569673691457125, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
       propertyPath: m_Name
       value: Bumblebee
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255569673691457134, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
+      propertyPath: forceFactor
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
@@ -372,9 +384,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6572285957056985885, guid: d7239b87dd0864145923331df0b7ad6b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572285957056985885, guid: d7239b87dd0864145923331df0b7ad6b, type: 3}
+      propertyPath: _breatheForce
+      value: 9.81
+      objectReference: {fileID: 0}
     - target: {fileID: 6642368155345336766, guid: d7239b87dd0864145923331df0b7ad6b, type: 3}
       propertyPath: m_Name
       value: Gravity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642368155345336766, guid: d7239b87dd0864145923331df0b7ad6b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7239b87dd0864145923331df0b7ad6b, type: 3}

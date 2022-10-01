@@ -13,7 +13,14 @@ public class BumblebeeController : MonoBehaviour
 
     void Update()
     {
-        var verticalValue = Input.GetAxis("Vertical");
+        //var verticalValue = Input.GetAxis("Vertical");
+        var verticalValue = 0f;
+        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.W)) {
+            verticalValue = 1f;
+        } 
+        if(Input.GetKeyDown(KeyCode.DownArrow)||Input.GetKeyDown(KeyCode.S)) {
+            verticalValue = -1f;
+        } 
 
         var verticalForce = 0f;
 
@@ -27,6 +34,7 @@ public class BumblebeeController : MonoBehaviour
         }
 
         var force = Vector2.up * verticalForce;
+        Debug.Log("force: " + force);
         rigidbody.AddForce(force, ForceMode2D.Impulse);
         
         rigidbody.velocity = Vector2.up * Mathf.Clamp(rigidbody.velocity.y, -maxVerticalVelocity, maxVerticalVelocity);
