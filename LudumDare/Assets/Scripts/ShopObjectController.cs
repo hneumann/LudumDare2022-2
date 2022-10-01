@@ -27,11 +27,9 @@ public class ShopObjectController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D (Collider2D collider) {
-        Debug.Log("Shop Open: " + _shopOpen);
         if (_shopOpen) {
             GameObject hitObject = collider.gameObject;
             if (hitObject.tag == "Player") {
-                Debug.Log("hit player");
                 _gameController.StartShopping(this);
             }
         }
