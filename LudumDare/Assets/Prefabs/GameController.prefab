@@ -46,3 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cycleTime: 10
   _grativyIncreasePerCycle: 0.13
+  flowerPrefabs:
+  - {fileID: 1246573331238276832, guid: f246ceca4128c554180c2b2de018db72, type: 3}
+  - {fileID: 7179873520256054137, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
+  - {fileID: 7351572451046892645, guid: 03c185349e8241748985ef5758e3008f, type: 3}
+  _flowerSpawnTime: 10
+  _flowerSpawnTimeRangeModifier: 2

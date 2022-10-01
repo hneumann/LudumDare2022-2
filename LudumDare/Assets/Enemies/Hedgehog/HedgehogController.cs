@@ -1,10 +1,15 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using UniRx;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 public class HedgehogController : MonoBehaviour
 {
+    [Inject] private InvisibleWalls invisibleWalls;
+    
     [SerializeField] private Transform jaw;
     [SerializeField] private float maxJawAngle;
     [SerializeField] private float animationSpeed;
@@ -15,18 +20,27 @@ public class HedgehogController : MonoBehaviour
     private float animationStartTime;
     private float animationStartAngle;
 
-    private void OnEnable()
+    public bool isBiting;
+
+    private void Start()
     {
-        OpenJaw();
+        invisibleWalls.TargetCollideBottom.Subscribe(vec => BiteAt(new Vector3(vec.x, vec.y, transform.position.z)))
+            .AddTo(this);
     }
 
     public void BiteAt(Vector3 screenPosition)
     {
+        if (isBiting)
+        {
+            return;
+        }
+
+        isBiting = true;
         var startPosition = screenPosition - biteAnimationStartOffset;
         BiteAtInternal(startPosition, screenPosition);
     }
 
-    public async Task BiteAtInternal(Vector3 startPosition, Vector3 targetPosition)
+    private async Task BiteAtInternal(Vector3 startPosition, Vector3 targetPosition)
     {
         jaw.localRotation = Quaternion.Euler(0, 0, maxJawAngle);
         transform.position = startPosition;
@@ -54,6 +68,7 @@ public class HedgehogController : MonoBehaviour
 
             await Task.Yield();
         }
+        isBiting = false;
     }
 
     public async Task CloseJaw()
