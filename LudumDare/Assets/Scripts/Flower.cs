@@ -7,21 +7,28 @@ public class Flower : MonoBehaviour
     [SerializeField] private int randomModifierRange;
     [SerializeField] private int _currentYield;
     [SerializeField] private float harvestTimeRequired;
+    [SerializeField] private int _nectarPerHarvest;
+    [SerializeField] private float _movementSpeed = 1f;
     private float harvestTimer = 0;
 
     [Inject] private GameController gameController;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         _currentYield = _nectarYield + Random.Range(-randomModifierRange, randomModifierRange);
-        Debug.Log(_currentYield);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameController.GetState() == GameController.GameState.playing) {
+            transform.localPosition = new Vector3(transform.localPosition.x - _movementSpeed * Time.deltaTime, transform.localPosition.y, transform.localPosition.z);
+            if(transform.localPosition.x <= -15f) {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     public int Harvest() {
@@ -35,6 +42,8 @@ public class Flower : MonoBehaviour
                 _currentYield -= 1;
                 return 1;
             }
+
+         
         }
         return 0;
     }
