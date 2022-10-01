@@ -1,9 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class BumblebeeController : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameController gameController;
+    [Inject] private GameController gameController;
 
     [Header("Controls")]
     [SerializeField] private Rigidbody2D rigidbody;

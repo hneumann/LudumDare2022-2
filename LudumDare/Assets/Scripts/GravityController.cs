@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GravityController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class GravityController : MonoBehaviour
 
     private bool _playing = false;
 
-    [SerializeField] private GameController gameController;
+    [Inject] private GameController gameController;
 
     // Start is called before the first frame update
     void Start()

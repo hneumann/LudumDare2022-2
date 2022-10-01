@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using Zenject;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private BumblebeeController player;
+    [Inject] private BumblebeeController player;
     public enum GameState
     {
         playing,

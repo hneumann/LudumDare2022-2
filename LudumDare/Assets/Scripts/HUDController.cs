@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Zenject;
 
 public class HUDController : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameController gameController;
-    [SerializeField] private BumblebeeController player;
+    [Inject] private GameController gameController;
+    [Inject] private BumblebeeController player;
 
     [Header("HUD Components")]
     [SerializeField] private GameObject _breathCycleCounter;

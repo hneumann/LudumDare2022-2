@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Flower : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Flower : MonoBehaviour
     [SerializeField] private int _nectarPerHarvest;
     private float harvestTimer = 0;
 
-    [SerializeField] private GameController gameController;
+    [Inject] private GameController gameController;
 
     // Start is called before the first frame update
     void Start()
