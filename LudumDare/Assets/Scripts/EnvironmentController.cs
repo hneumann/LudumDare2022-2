@@ -7,13 +7,13 @@ using UnityEngine;
 public class EnvironmentController : MonoBehaviour
 {
     [SerializeField] private float tileSpeed = 1;
-    [SerializeField] private SpriteRenderer prefab;
+    [SerializeField] private Transform prefab;
     [SerializeField] private bool useWidthOverride;
     [SerializeField] private float overrideWidth;
     
 
-    private List<SpriteRenderer> floorTiles = new List<SpriteRenderer>(); 
-    private float tileWidth => useWidthOverride ? overrideWidth : prefab.bounds.size.x;
+    private List<Transform> floorTiles = new List<Transform>(); 
+    private float tileWidth;
  
     void Awake()
     {
@@ -21,6 +21,13 @@ public class EnvironmentController : MonoBehaviour
         float camHalfHeight = Camera.main.orthographicSize; 
         float camHalfWidth = screenAspect * camHalfHeight;
         float camWidth = 2.0f * camHalfWidth;
+
+        tileWidth = overrideWidth;
+        
+        if (!useWidthOverride && prefab.TryGetComponent(out SpriteRenderer spriteRenderer))
+        {
+            tileWidth = spriteRenderer.bounds.size.x;
+        }
         
         SetupTiles(camWidth);
 
@@ -40,20 +47,21 @@ public class EnvironmentController : MonoBehaviour
 
     private void SetupTiles(float screenWidth)
     {
-        floorTiles = GetComponentsInChildren<SpriteRenderer>().ToList();
-        if(!floorTiles.Contains(prefab))
+        floorTiles = GetComponentsInChildren<Transform>().ToList();
+        floorTiles.Remove(transform);
+        if(!floorTiles.Contains(prefab.transform))
         {
-            floorTiles.Add(prefab);
+            floorTiles.Add(prefab.transform);
         }
 
-        var spriteCount = screenWidth/ prefab.bounds.size.x + 2;
+        var spriteCount = screenWidth / tileWidth +2;
 
         if(spriteCount == floorTiles.Count)
             return;
 
         while (spriteCount > floorTiles.Count)
         {
-            floorTiles.Add(Instantiate(prefab, transform));
+            floorTiles.Add(Instantiate(prefab, transform).transform);
         }
         while (spriteCount < floorTiles.Count-1)
         {
