@@ -157,5 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nectarYield: 10
-  randomModifierRange: 0
+  randomModifierRange: 3
+  _currentYield: 0
   harvestTimeRequired: 1

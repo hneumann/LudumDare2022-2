@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cycleTime: 10
-  _grativyIncreasePerCycle: 0
+  _grativyIncreasePerCycle: 0.13
