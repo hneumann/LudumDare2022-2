@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7529080942963223032
 Transform:
   m_ObjectHideFlags: 0
@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jaw: {fileID: 7529080944590225671}
   maxJawAngle: 9
-  animationSpeed: 25
-  biteAnimationStartOffset: {x: 0, y: 0, z: 0}
+  animationSpeed: 50
+  biteDuration: 0.7
+  biteAnimationStartOffset: {x: -5, y: 3.5, z: 0}
 --- !u!1 &7529080943114401438
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529080943114401438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.72, y: -0.26, z: 0}
+  m_LocalPosition: {x: 3.72, y: 0.32000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529080944590225670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.71, y: -0.26, z: 0.02}
+  m_LocalPosition: {x: 3.71, y: 0.32, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
