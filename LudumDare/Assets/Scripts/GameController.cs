@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
     }
 
     public int CycleCount => _cycleCount;
+    public float gravityIncreasePerCycle => _grativyIncreasePerCycle;
 
     public void StartGame() {
         _state = GameState.playing;

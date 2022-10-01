@@ -27,6 +27,7 @@ public class GravityController : MonoBehaviour
     {
         if(gameController.GetState() == GameController.GameState.playing) {
             _gravityForce = _breatheRythm.Evaluate((_timer % _cycleTime)/_cycleTime) * _breatheForce;
+            _gravityForce += gameController.CycleCount * gameController.gravityIncreasePerCycle;
             _timer += Time.deltaTime;
             ModifyGravity(_gravityForce);
         }
