@@ -94,13 +94,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1246573331238276838}
   - component: {fileID: 1246573331238276839}
+  - component: {fileID: 625693872659929519}
   m_Layer: 0
   m_Name: Glockenblume
   m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1246573331238276838
 Transform:
   m_ObjectHideFlags: 0
@@ -134,8 +135,21 @@ MonoBehaviour:
   randomModifierRange: 3
   _currentYield: 0
   harvestTimeRequired: 1
-  _nectarPerHarvest: 0
-  gameController: {fileID: 0}
+  _nectarPerHarvest: 3
+  _movementSpeed: 1.5
+--- !u!114 &625693872659929519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246573331238276832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 2
 --- !u!1 &1246573333060669292
 GameObject:
   m_ObjectHideFlags: 0
