@@ -8,9 +8,11 @@ public class HUDController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameController gameController;
+    [SerializeField] private BumblebeeController player;
 
     [Header("HUD Components")]
     [SerializeField] private GameObject _breathCycleCounter;
+    [SerializeField] private GameObject _nectarCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +24,6 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         _breathCycleCounter.GetComponent<TextMeshProUGUI>().text = gameController.CycleCount.ToString();
+        _nectarCounter.GetComponent<TextMeshProUGUI>().text = player.NectarCount.ToString();
     }
 }

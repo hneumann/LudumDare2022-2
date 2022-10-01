@@ -15,11 +15,10 @@ public class BumblebeeController : MonoBehaviour
     [SerializeField] private float maxVerticalVelocity;
 
     [Header("Score")]
-    private int nectarCount = 0;
+    private int _nectarCount = 0;
 
     void Update()
     {
-
         if (gameController.GetState() == GameController.GameState.playing) {
             //var verticalValue = Input.GetAxis("Vertical");
             var verticalValue = 0f;
@@ -57,4 +56,21 @@ public class BumblebeeController : MonoBehaviour
             //rigidbody.velocity = Vector2.right * Mathf.Clamp(rigidbody.velocity.x, -maxVerticalVelocity, maxVerticalVelocity);
         }
     }
+
+    private void OnTriggerEnter2D ( Collider2D collision ) {
+        
+    }
+
+    private void OnTriggerStay2D (Collider2D collision) {
+        GameObject hitObject = collision.gameObject;
+        if(hitObject.tag == "Flower") {
+            _nectarCount += hitObject.GetComponentInParent<Flower>().Harvest();
+        }
+    }
+
+    private void OnTriggerExit2D ( Collider2D collision ) {
+        
+    }
+
+    public int NectarCount => _nectarCount;
 }
