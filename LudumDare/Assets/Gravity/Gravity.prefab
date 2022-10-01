@@ -47,6 +47,6 @@ MonoBehaviour:
   _breatheInTime: 5
   _breatheOutTime: 5
   _breatheIdleTime: 1
-  _breatheInForce: 2
+  _breatheInForce: 9
   _breatheOutForce: -15
   _breatheIdleForce: -9.81
