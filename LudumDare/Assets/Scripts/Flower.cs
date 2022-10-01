@@ -8,6 +8,7 @@ public class Flower : MonoBehaviour
     [SerializeField] private int randomModifierRange;
     [SerializeField] private int _currentYield;
     [SerializeField] private float harvestTimeRequired;
+    [SerializeField] private int _nectarPerHarvest;
     private float harvestTimer = 0;
 
     [SerializeField] private GameController gameController;
@@ -16,7 +17,6 @@ public class Flower : MonoBehaviour
     void Start()
     {
         _currentYield = _nectarYield + Random.Range(-randomModifierRange, randomModifierRange);
-        Debug.Log(_currentYield);
     }
 
     // Update is called once per frame

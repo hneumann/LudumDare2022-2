@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private float _cycleTime;
     [SerializeField] private float _grativyIncreasePerCycle;
+    [SerializeField] private List<GameObject> flowerPrefabs;
+
     private float _gameTimer;
     private int _cycleCount;
 
