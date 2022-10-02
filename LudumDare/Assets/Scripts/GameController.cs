@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
     public void ResetValues() {
         _flowerSpawnTimer = _flowerSpawnTime;
         _shopSpawnTimer = _shopSpawnTime;
-        _cycleCount = 0;
+        _gameTimer = 0;
         Upgrades.Instance.Reset();
     }
     public void ClearScene() {
