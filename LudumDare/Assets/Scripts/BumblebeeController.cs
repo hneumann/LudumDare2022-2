@@ -14,6 +14,7 @@ public class BumblebeeController : MonoBehaviour
     private bool useForceCurve;
 
     [SerializeField] private float forceFactor;
+    [SerializeField] private float dragCoefficientPerPollen;
     [SerializeField] private AnimationCurve forceFactorCurve;
     [SerializeField] private float maxVerticalVelocity;
     
@@ -70,9 +71,17 @@ public class BumblebeeController : MonoBehaviour
             {
                 verticalForce = verticalValue * forceFactor;
                 horizontalForce = horizontalValue * forceFactor;
-                //Applying additional force from Upgrades
+                // Applying additional force from Upgrades
                 verticalForce *= Upgrades.Instance.ExtraVerticalForce;
                 horizontalForce *= Upgrades.Instance.ExtraHorizontalForce;
+                // Add pollen weight
+                verticalForce *= 1 - dragCoefficientPerPollen * _pollenCount;
+                horizontalForce *= 1 - dragCoefficientPerPollen * _pollenCount;
+                /*
+                if(horizontalForce != 0) {
+                    Debug.Log("horizontalForce: " + horizontalForce);
+                    Debug.Log("dragCoefficientPerPollen * _pollenCount: " + dragCoefficientPerPollen * _pollenCount);
+                }*/
             }
 
             var force = Vector2.up * verticalForce + Vector2.right * horizontalForce;
@@ -128,7 +137,7 @@ public class BumblebeeController : MonoBehaviour
         for (int i = _pollenCount; i < pollen.Count; i++) {
             Destroy(pollen[i]);
         }
-        pollen.RemoveRange(_pollenCount - 1, diff);
+        pollen.RemoveRange(_pollenCount, diff);
     }
 
     public int VerticalForceUpgradeLevel {
