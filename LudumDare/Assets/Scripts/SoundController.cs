@@ -33,6 +33,13 @@ public class SoundController : MonoBehaviour
 
     public void ToggleMute() {
         _muted = !_muted;
+        if(_muted) {
+            StopFlyingSound();
+        } else {
+            PlayFlyingSound();
+        }
+        PlayBackgroundMusic();
+        
     }
 
     private void PlayBackgroundMusic() {
@@ -46,7 +53,7 @@ public class SoundController : MonoBehaviour
                 _musicOutput.GetComponent<AudioSource>().volume = 0.5f;
             }
         } else {
-            if (_musicOutput == null) {
+            if (_musicOutput != null) {
                 _musicOutput.GetComponent<AudioSource>().Stop();
             }
         }
