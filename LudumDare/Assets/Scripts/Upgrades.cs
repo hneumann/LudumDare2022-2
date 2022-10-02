@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 
 public class Upgrades : MonoBehaviour
@@ -43,7 +44,17 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private Sprite BonusHarvestUpgradeSpriteSecondary;
     public int bonusHarvestUpgradeBasePrice;
     public int BonusHarvestLevel;
-    public float ExtraHarvestChance => BonusHarvestLevel * BaseForceMultiplier; 
+    public float ExtraHarvestChance => BonusHarvestLevel * BaseForceMultiplier;
+
+    [Header("FloatingPollenIntervall")]
+    [SerializeField] private Sprite FloatingPollenIntervallUpgradeSprite;
+    [SerializeField] private Sprite FloatingPollenIntervallUpgradeSpriteSecondary;
+    public int FloatingPollenIntervallUpgradeBasePrice;
+    public ReactiveProperty<int> FloatingPollenIntervallUpgradeLevel = new(1);
+
+    public ReadOnlyReactiveProperty<float> FloatingPollenIntervallFactor => FloatingPollenIntervallUpgradeLevel
+        .Select(level => Mathf.Pow(0.9f, level))
+        .ToReadOnlyReactiveProperty();
 
 
     public void Reset()
@@ -51,6 +62,7 @@ public class Upgrades : MonoBehaviour
         VerticalForceLevel = 0;
         HorizontalForceLevel = 0;
         HarvestSpeedLevel = 0;
+        BonusHarvestLevel = 0;
     }
 
     void Awake()
@@ -65,6 +77,7 @@ public class Upgrades : MonoBehaviour
         AddVerticalForceOption(options);
         AddHarvestSpeedOption(options);
         AddBonusHarvestOption(options);
+        AddFloatingPollenOption(options);
 
         Helper.Shuffle(options);
         return options.Take(3).ToList();
@@ -115,6 +128,18 @@ public class Upgrades : MonoBehaviour
             currentLevel = BonusHarvestLevel,
             text = "Bonus Harvest Chance",
             price = bonusHarvestUpgradeBasePrice + (BonusHarvestLevel * _priceIncreasePerLevel)
+        });
+    }
+    
+    private void AddFloatingPollenOption(List<UpgradeOption> options)
+    {
+        options.Add(new UpgradeOption{
+            sprite = FloatingPollenIntervallUpgradeSprite,
+            spriteSecondary = FloatingPollenIntervallUpgradeSpriteSecondary,
+            onSelected = () => FloatingPollenIntervallUpgradeLevel.Value += 1,
+            currentLevel = FloatingPollenIntervallUpgradeLevel.Value,
+            text = "More Floating Pollen",
+            price = FloatingPollenIntervallUpgradeBasePrice + (BonusHarvestLevel * _priceIncreasePerLevel)
         });
     }
 }
