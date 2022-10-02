@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
     private void SpawnFlower () {
         _flowerSpawnTimer = _flowerSpawnTime + UnityEngine.Random.Range(-_flowerSpawnTimeRangeModifier, _flowerSpawnTimeRangeModifier);
         GameObject newFlower = Instantiate(flowerPrefabs[UnityEngine.Random.Range(0, flowerPrefabs.Count)]);
-        newFlower.transform.localPosition = new Vector3(10f, UnityEngine.Random.Range(-4f, 0f), newFlower.transform.localPosition.z);
+        newFlower.transform.localPosition = new Vector3(10f, UnityEngine.Random.Range(-7f, -4f), newFlower.transform.localPosition.z);
     }
 
     private void SpawnShop() {
@@ -85,11 +85,9 @@ public class GameController : MonoBehaviour
                     break;
                 case GameState.playing:
                     Time.timeScale = 1f;
-                    shopUI.gameObject.SetActive(false);
                     break;
                 case GameState.shopping:
                     Time.timeScale = 0.01f;
-                    shopUI.gameObject.SetActive(true);
                     break;
             }
         }
@@ -104,11 +102,13 @@ public class GameController : MonoBehaviour
 
     public void StartShopping(ShopObjectController shop) {
         State = GameState.shopping;
+        shopUI.OpenShop();
         _shopObject = shop;
     }
 
     public void StopShopping() {
-        State = GameState.playing;
+        shopUI.gameObject.SetActive(false);
         _shopObject.CloseShop();
+        State = GameState.playing;
     }
 }
