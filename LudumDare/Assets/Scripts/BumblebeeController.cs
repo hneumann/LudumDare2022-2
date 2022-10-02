@@ -15,7 +15,12 @@ public class BumblebeeController : MonoBehaviour
     [SerializeField] private AnimationCurve forceFactorCurve;
     [SerializeField] private float maxVerticalVelocity;
 
-    [Header("Score")] private int _nectarCount = 0;
+    // Upgrades
+    private int _verticalForceUpgradeLevel = 0;
+    private int _horizontalForceUpgradeLevel = 0;
+
+    [Header("Score")]
+    private int _nectarCount = 0;
 
     void Update()
     {
@@ -58,6 +63,11 @@ public class BumblebeeController : MonoBehaviour
             {
                 verticalForce = verticalValue * forceFactor;
                 horizontalForce = horizontalValue * forceFactor;
+                Debug.Log("verticalForce: " + verticalForce);
+                //Applying additional force from Upgrades
+                //verticalForce *= Upgrades.Instance.ExtraVerticalForce;
+                Debug.Log("with upgrade verticalForce: " + verticalForce);
+                //horizontalForce *= Upgrades.Instance.ExtraHorizontalForce;
             }
 
             var force = Vector2.up * verticalForce + Vector2.right * horizontalForce;
@@ -92,4 +102,21 @@ public class BumblebeeController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision) { }
 
     public int NectarCount => _nectarCount;
+    public int VerticalForceUpgradeLevel {
+        get { return _verticalForceUpgradeLevel; }
+        set { _verticalForceUpgradeLevel = value; }
+    }
+    public int HorizontalForceUpgradeLevel {
+        get { return _horizontalForceUpgradeLevel; }
+        set { _horizontalForceUpgradeLevel = value; }
+    }
+
+    public void Reset () {
+        ResetUpgrades();
+    }
+
+    private void ResetUpgrades() {
+        _horizontalForceUpgradeLevel = 0;
+        _verticalForceUpgradeLevel = 0;
+    }
 }
