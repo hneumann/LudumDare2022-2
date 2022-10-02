@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 6222984065340730710, guid: 64adf4289bde4464e8d55e73c9cf0a9e, type: 3}
     - target: {fileID: 1056863232264746610, guid: ed78269500766ee4c81c37029307cb21, type: 3}
       propertyPath: _shopSpawnTime
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1112694777550624331, guid: ed78269500766ee4c81c37029307cb21, type: 3}
       propertyPath: m_RootOrder

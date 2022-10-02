@@ -179,6 +179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 471378045742545670}
     m_Modifications:
+    - target: {fileID: 1572647150665600630, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 2992234956887226110, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: prefab
       value: 
@@ -254,6 +258,34 @@ PrefabInstance:
     - target: {fileID: 3258695730015014188, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: overrideWidth
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556129842865895421, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556129842865895421, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.365241
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556129842865895421, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987657240888780575, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987657240888780575, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987657240888780575, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978968919554152827, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: ShapeModule.randomPositionAmount
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 9063311821276864535, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: prefab
