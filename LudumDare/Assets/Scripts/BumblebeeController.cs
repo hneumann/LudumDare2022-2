@@ -14,12 +14,13 @@ public class BumblebeeController : MonoBehaviour
     private bool useForceCurve;
 
     [SerializeField] private float forceFactor;
+    [SerializeField] private float dragCoefficientPerPollen;
     [SerializeField] private AnimationCurve forceFactorCurve;
     [SerializeField] private float maxVerticalVelocity;
     
     [SerializeField] private Transform pollenAnchor;
     [SerializeField] private GameObject pollenPrefab;
-    private float pollenSpawnRange = 0.2f;
+    private float pollenSpawnRange = 0.3f;
     private List<GameObject> pollen = new List<GameObject>();
 
     // Upgrades
@@ -70,9 +71,17 @@ public class BumblebeeController : MonoBehaviour
             {
                 verticalForce = verticalValue * forceFactor;
                 horizontalForce = horizontalValue * forceFactor;
-                //Applying additional force from Upgrades
+                // Applying additional force from Upgrades
                 verticalForce *= Upgrades.Instance.ExtraVerticalForce;
                 horizontalForce *= Upgrades.Instance.ExtraHorizontalForce;
+                // Add pollen weight
+                verticalForce *= 1 - dragCoefficientPerPollen * _pollenCount;
+                horizontalForce *= 1 - dragCoefficientPerPollen * _pollenCount;
+                /*
+                if(horizontalForce != 0) {
+                    Debug.Log("horizontalForce: " + horizontalForce);
+                    Debug.Log("dragCoefficientPerPollen * _pollenCount: " + dragCoefficientPerPollen * _pollenCount);
+                }*/
             }
 
             var force = Vector2.up * verticalForce + Vector2.right * horizontalForce;
@@ -120,6 +129,15 @@ public class BumblebeeController : MonoBehaviour
     public int PollenCount => _pollenCount;
     public void BuyUpgrade(int price) {
         _pollenCount -= price;
+        AdjustPollen();
+    }
+
+    private void AdjustPollen() {
+        int diff = pollen.Count - _pollenCount;
+        for (int i = _pollenCount; i < pollen.Count; i++) {
+            Destroy(pollen[i]);
+        }
+        pollen.RemoveRange(_pollenCount, diff);
     }
 
     public int VerticalForceUpgradeLevel {
