@@ -6,7 +6,9 @@ using Zenject;
 
 public class BumblebeeController : MonoBehaviour
 {
-    [Header("References")] [Inject] private GameController gameController;
+    [Header("References")] 
+    [Inject] private GameController gameController;
+    [Inject] private SoundController soundController;
 
     [Header("Controls")] [SerializeField] private Rigidbody2D rigidbody;
 
@@ -33,6 +35,7 @@ public class BumblebeeController : MonoBehaviour
 
     private void Awake () {
         Reset();
+        
     }
     void Update()
     {
@@ -104,6 +107,12 @@ public class BumblebeeController : MonoBehaviour
             collision.transform.parent.DOMoveX(-30, 40);
             gameController.StartGame();
         }
+
+        if (collision.gameObject.tag == "Flower")
+        {
+            Debug.Log("start");
+            collision.gameObject.GetComponentInParent<Flower>().StartAnimation();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -129,7 +138,15 @@ public class BumblebeeController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) { }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Flower")
+        {
+            Debug.Log("stop");
+
+            collision.gameObject.GetComponentInParent<Flower>().StopAnimation();
+        }
+    }
 
     public int PollenCount => _pollenCount;
     public int TotalPollenCount => _totalPollenCount;
@@ -141,6 +158,7 @@ public class BumblebeeController : MonoBehaviour
     public void FloatingPollenCollected()
     {
         _pollenCount += 1;
+        _totalPollenCount += 1;
         SpawnPollen(1);
     }
 
@@ -163,7 +181,8 @@ public class BumblebeeController : MonoBehaviour
 
     public void Die() {
         transform.GetComponent<BoxCollider2D>().enabled = false;
-        this.transform.DOLocalMove(Vector3.zero, 0.3f); 
+        this.transform.DOLocalMove(Vector3.zero, 0.3f);
+        soundController.StopFlyingSound();
     }
 
     public void Reset () {
@@ -173,7 +192,7 @@ public class BumblebeeController : MonoBehaviour
         ResetUpgrades();
         transform.GetComponent<BoxCollider2D>().enabled = true;
         transform.parent = null;
-        
+        soundController.PlayFlyingSound();
     }
 
     public void ResetPosition() {

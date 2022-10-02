@@ -8,6 +8,7 @@ public class MainInstaller : MonoInstaller
     [SerializeField] private InvisibleWalls invisibleWalls;
     [SerializeField] private ShopController shopController;
     [SerializeField] private GravityController gravityController;
+    [SerializeField] private SoundController soundController;
     
     public override void InstallBindings()
     {
@@ -16,5 +17,6 @@ public class MainInstaller : MonoInstaller
         Container.Bind<InvisibleWalls>().FromInstance(invisibleWalls).AsSingle().NonLazy();
         Container.Bind<ShopController>().FromInstance(shopController).AsSingle().NonLazy();
         Container.Bind<GravityController>().FromInstance(gravityController).AsSingle().NonLazy();
+        Container.Bind<SoundController>().FromInstance(soundController).AsSingle().NonLazy();
     }
 }

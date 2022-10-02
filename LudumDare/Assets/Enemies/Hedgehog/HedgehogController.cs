@@ -11,6 +11,7 @@ public class HedgehogController : MonoBehaviour
     [Inject] private InvisibleWalls invisibleWalls;
     [Inject] private GameController gameController;
     [Inject] private BumblebeeController player;
+    [Inject] private SoundController soundController;
 
     [SerializeField] private Transform jaw;
     [SerializeField] private float maxJawAngle;
@@ -92,7 +93,8 @@ public class HedgehogController : MonoBehaviour
         animationStartAngle = jaw.localRotation.eulerAngles.z;
 
         cancellationTokenSource = new CancellationTokenSource();
-
+        
+        soundController.PlayHedgehogSound();
         await CloseJawInternal(cancellationTokenSource.Token);
     }
 
