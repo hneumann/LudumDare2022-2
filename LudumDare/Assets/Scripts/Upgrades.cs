@@ -31,27 +31,19 @@ public class Upgrades : MonoBehaviour
     public int HorizontalForceLevel;
     public float ExtraHorizontalForce => 1 + (HorizontalForceLevel-1) * BaseForceMultiplier; 
 
+    [Header("PollenHarvestSpeed")]
+    [SerializeField] private Sprite HarvestSpeedUpgradeSprite;
+    [SerializeField] private Sprite HarvestSpeedUpgradeSpriteSecondary;
+    public int harvestSpeedUpgradeBasePrice;
+    public int HarvestSpeedLevel;
+    public float ExtraHarvestSpeed => 1 + (HarvestSpeedLevel-1) * BaseForceMultiplier; 
+
 
     public void Reset()
     {
         VerticalForceLevel = 1;
         HorizontalForceLevel = 1;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Reset();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            VerticalForceLevel++;
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            HorizontalForceLevel++;
-        }
+        HarvestSpeedLevel = 1;
     }
 
     void Awake()
@@ -64,7 +56,7 @@ public class Upgrades : MonoBehaviour
         var options = new List<UpgradeOption>();
         AddHorizontalForceOption(options);
         AddVerticalForceOption(options);
-        AddVerticalForceOption(options);
+        AddHarvestSpeedOption(options);
 
         Helper.Shuffle(options);
         return options.Take(3).ToList();
@@ -91,6 +83,18 @@ public class Upgrades : MonoBehaviour
             currentLevel = HorizontalForceLevel,
             text = "Horizontal Flight Power",
             price = horizontalForceUpgradeBasePrice + (HorizontalForceLevel * _priceIncreasePerLevel)
+        });
+    }
+
+    private void AddHarvestSpeedOption(List<UpgradeOption> options)
+    {
+        options.Add(new UpgradeOption{
+            sprite = HarvestSpeedUpgradeSprite,
+            spriteSecondary = HarvestSpeedUpgradeSpriteSecondary,
+            onSelected = () => HarvestSpeedLevel += 1,
+            currentLevel = HarvestSpeedLevel,
+            text = "Harvest Speed Increase",
+            price = harvestSpeedUpgradeBasePrice + (HarvestSpeedLevel* _priceIncreasePerLevel)
         });
     }
 

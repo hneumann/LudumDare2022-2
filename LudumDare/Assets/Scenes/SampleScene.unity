@@ -719,7 +719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179873520256054143, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7179873520256054143, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -727,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7179873520256054143, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5735953
+      value: -4.22
       objectReference: {fileID: 0}
     - target: {fileID: 7179873520256054143, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -962,8 +962,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
+      propertyPath: HarvestSpeedLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
       propertyPath: _priceIncreasePerLevel
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
+      propertyPath: HarvestSpeedUpgradeSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 92b5d30a5d7e36c4ea81e5f134640c73, type: 3}
+    - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
+      propertyPath: harvestSpeedUpgradeBasePrice
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
       propertyPath: verticalForceUpgradeBasePrice
@@ -973,6 +985,10 @@ PrefabInstance:
       propertyPath: horizontalForceUpgradeBasePrice
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 5050446386264072741, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
+      propertyPath: HarvestSpeedUpgradeSpriteSecondary
+      value: 
+      objectReference: {fileID: 21300000, guid: 0392b8ca088dd1940a2ad76300816ee3, type: 3}
     - target: {fileID: 7413704572810694283, guid: ef0475cbf2c3557499bd061ae91c67f4, type: 3}
       propertyPath: m_Name
       value: Upgrades
