@@ -33,17 +33,20 @@ public class Flower : MonoBehaviour
 
     public int Harvest() {
         if (gameController.GetState() == GameController.GameState.playing) {
-            if(_currentYield == 0) {
-                return 0;
+            if (_currentYield > 0) {
+                int harvestAmount = 0;
+                harvestTimer += (Time.deltaTime * Upgrades.Instance.ExtraHarvestSpeed);
+                if (harvestTimer >= harvestTimeRequired) {
+                    harvestTimer = 0f;
+                    _currentYield -= 1;
+                    harvestAmount += 1;
+                    float rand = Random.Range(0f, 1f);
+                    if (rand <= Upgrades.Instance.ExtraHarvestChance) {
+                        harvestAmount += 1;
+                    }
+                }
+                return harvestAmount;
             }
-            harvestTimer += Time.deltaTime;
-            if(harvestTimer >= harvestTimeRequired) {
-                harvestTimer = 0f;
-                _currentYield -= 1;
-                return 1;
-            }
-
-         
         }
         return 0;
     }
