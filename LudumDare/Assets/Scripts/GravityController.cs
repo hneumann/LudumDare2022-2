@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,8 @@ public class GravityController : MonoBehaviour
 
     private float _timer;
     private float _gravityForce;
+    public ReadOnlyReactiveProperty<float> TimeInCycle => _timeInCycle.ToReadOnlyReactiveProperty();
+    private ReactiveProperty<float> _timeInCycle = new ReactiveProperty<float>();
 
     private bool _playing = false;
 
@@ -19,14 +22,16 @@ public class GravityController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ModifyGravity(0f);
+        ModifyGravity(-9.81f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameController.GetState() == GameController.GameState.playing) {
-            _gravityForce = _breatheRythm.Evaluate((_timer % _cycleTime)/_cycleTime) * _breatheForce;
+        if(gameController.GetState() == GameController.GameState.playing)
+        {
+            _timeInCycle.Value = (_timer % _cycleTime) / _cycleTime;
+            _gravityForce = _breatheRythm.Evaluate(_timeInCycle.Value) * _breatheForce;
             _gravityForce += gameController.CycleCount * gameController.gravityIncreasePerCycle;
             _timer += Time.deltaTime;
             ModifyGravity(_gravityForce);
