@@ -6,8 +6,7 @@ using Zenject;
 
 public class BumblebeeController : MonoBehaviour
 {
-    [Header("References")] 
-    [Inject] private GameController gameController;
+    [Header("References")] [Inject] private GameController gameController;
     [Inject] private SoundController soundController;
 
     [Header("Controls")] [SerializeField] private Rigidbody2D rigidbody;
@@ -19,7 +18,7 @@ public class BumblebeeController : MonoBehaviour
     [SerializeField] private float dragCoefficientPerPollen;
     [SerializeField] private AnimationCurve forceFactorCurve;
     [SerializeField] private float maxVerticalVelocity;
-    
+
     [SerializeField] private Transform pollenAnchor;
     [SerializeField] private GameObject pollenPrefab;
     private float pollenSpawnRange = 0.3f;
@@ -29,14 +28,14 @@ public class BumblebeeController : MonoBehaviour
     private int _verticalForceUpgradeLevel = 0;
     private int _horizontalForceUpgradeLevel = 0;
 
-    [Header("Score")]
-    private int _pollenCount = 0;
+    [Header("Score")] private int _pollenCount = 0;
     private int _totalPollenCount = 0;
 
-    private void Awake () {
+    private void Awake()
+    {
         Reset();
-        
     }
+
     void Update()
     {
         if (gameController.GetState() is GameController.GameState.playing or GameController.GameState.idle)
@@ -98,7 +97,23 @@ public class BumblebeeController : MonoBehaviour
                 Vector2.up * Mathf.Clamp(rigidbody.velocity.y, -maxVerticalVelocity, maxVerticalVelocity) +
                 Vector2.right * Mathf.Clamp(rigidbody.velocity.x, -maxVerticalVelocity, maxVerticalVelocity);
         }
+
+        var vertSpeed = rigidbody.velocity.x;
+        var actualRotation = transform.rotation.eulerAngles.z;
+        
+        var angle = MapRange(vertSpeed, -10, 10, 30, -30);
+
+        angle = Mathf.Clamp(angle, -20, 20);
+
+        transform.DORotate(Vector3.forward * angle, 2f);
     }
+
+
+    float MapRange(float s, float a1, float a2, float b1, float b2)
+    {
+        return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -118,9 +133,13 @@ public class BumblebeeController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         GameObject hitObject = collision.gameObject;
-        if (hitObject.tag == "Flower") {
+
+        if (hitObject.tag == "Flower")
+        {
             int pollenThisFrame = hitObject.GetComponentInParent<Flower>().Harvest();
-            if (pollenThisFrame >= 1) {
+
+            if (pollenThisFrame >= 1)
+            {
                 _pollenCount += pollenThisFrame;
                 _totalPollenCount += pollenThisFrame;
                 SpawnPollen(pollenThisFrame); //Adding Pollen Images to BumblebeeLegs
@@ -128,11 +147,16 @@ public class BumblebeeController : MonoBehaviour
         }
     }
 
-    private void SpawnPollen ( int pollenThisFrame ) {
-        for(int i = 0; i <= pollenThisFrame; i++) {
+    private void SpawnPollen(int pollenThisFrame)
+    {
+        for (int i = 0; i <= pollenThisFrame; i++)
+        {
             int anchorID = UnityEngine.Random.Range(0, pollenAnchor.transform.childCount);
             GameObject newPollen = Instantiate(pollenPrefab, pollenAnchor.GetChild(anchorID).transform);
-            newPollen.transform.localPosition = new Vector3(UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange), UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange), -0.02f);
+            newPollen.transform.localPosition =
+                new Vector3(UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange),
+                            UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange),
+                            -0.02f);
             newPollen.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             pollen.Add(newPollen);
         }
@@ -150,7 +174,9 @@ public class BumblebeeController : MonoBehaviour
 
     public int PollenCount => _pollenCount;
     public int TotalPollenCount => _totalPollenCount;
-    public void BuyUpgrade(int price) {
+
+    public void BuyUpgrade(int price)
+    {
         _pollenCount -= price;
         AdjustPollen();
     }
@@ -162,30 +188,39 @@ public class BumblebeeController : MonoBehaviour
         SpawnPollen(1);
     }
 
-    private void AdjustPollen() {
+    private void AdjustPollen()
+    {
         int diff = pollen.Count - _pollenCount;
-        for (int i = _pollenCount; i < pollen.Count; i++) {
+
+        for (int i = _pollenCount; i < pollen.Count; i++)
+        {
             Destroy(pollen[i]);
         }
+
         pollen.RemoveRange(_pollenCount, diff);
     }
 
-    public int VerticalForceUpgradeLevel {
+    public int VerticalForceUpgradeLevel
+    {
         get { return _verticalForceUpgradeLevel; }
         set { _verticalForceUpgradeLevel = value; }
     }
-    public int HorizontalForceUpgradeLevel {
+
+    public int HorizontalForceUpgradeLevel
+    {
         get { return _horizontalForceUpgradeLevel; }
         set { _horizontalForceUpgradeLevel = value; }
     }
 
-    public void Die() {
+    public void Die()
+    {
         transform.GetComponent<BoxCollider2D>().enabled = false;
         this.transform.DOLocalMove(Vector3.zero, 0.3f);
         soundController.StopFlyingSound();
     }
 
-    public void Reset () {
+    public void Reset()
+    {
         _pollenCount = 0;
         _totalPollenCount = 0;
         AdjustPollen();
@@ -195,11 +230,13 @@ public class BumblebeeController : MonoBehaviour
         soundController.PlayFlyingSound();
     }
 
-    public void ResetPosition() {
+    public void ResetPosition()
+    {
         transform.position = new Vector3(-4f, -2f, 0f);
     }
 
-    private void ResetUpgrades() {
+    private void ResetUpgrades()
+    {
         _horizontalForceUpgradeLevel = 0;
         _verticalForceUpgradeLevel = 0;
     }
