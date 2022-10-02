@@ -9,7 +9,8 @@ using Zenject;
 public class HedgehogController : MonoBehaviour
 {
     [Inject] private InvisibleWalls invisibleWalls;
-    
+    [Inject] private GameController gameController;
+
     [SerializeField] private Transform jaw;
     [SerializeField] private float maxJawAngle;
     [SerializeField] private float animationSpeed;
@@ -24,7 +25,8 @@ public class HedgehogController : MonoBehaviour
 
     private void Start()
     {
-        invisibleWalls.TargetCollideBottom.Subscribe(vec => BiteAt(new Vector3(vec.x, vec.y, transform.position.z)))
+        invisibleWalls.TargetCollideBottom.Where(_ => gameController.GetState() == GameController.GameState.playing)
+            .Subscribe(vec => BiteAt(new Vector3(vec.x, vec.y, transform.position.z)))
             .AddTo(this);
     }
 
@@ -68,6 +70,7 @@ public class HedgehogController : MonoBehaviour
 
             await Task.Yield();
         }
+
         isBiting = false;
     }
 

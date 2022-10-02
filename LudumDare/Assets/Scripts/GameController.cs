@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -30,6 +31,11 @@ public class GameController : MonoBehaviour
     [Header("Shop")]
     [SerializeField] private GameObject _shopPrefab;
     [SerializeField] private float _shopSpawnTime;
+
+    public ReadOnlyReactiveProperty<float> ScrollSpeedFactor => scrollSpeedFactor.ToReadOnlyReactiveProperty();
+    private ReactiveProperty<float> scrollSpeedFactor = new ReactiveProperty<float>();
+    
+
     private float _shopSpawnTimer;
     private ShopObjectController _shopObject;
 
@@ -38,12 +44,18 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _shopSpawnTimer = _shopSpawnTime;
-        StartGame();
+        // StartGame();
+        State = GameState.idle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            StartGame();
+        }
+        
         if(_state == GameState.playing) {
             _gameTimer += Time.deltaTime;
             _flowerSpawnTimer -= Time.deltaTime;
@@ -82,6 +94,8 @@ public class GameController : MonoBehaviour
             switch (_state) {
                 case GameState.idle:
                     Time.timeScale = 1f;
+                    scrollSpeedFactor.Value = 0;
+                    shopUI.gameObject.SetActive(false);
                     break;
                 case GameState.playing:
                     Time.timeScale = 1f;
@@ -98,7 +112,9 @@ public class GameController : MonoBehaviour
     public int CycleCount => _cycleCount;
     public float gravityIncreasePerCycle => _grativyIncreasePerCycle;
 
-    public void StartGame() {
+    public void StartGame()
+    {
+        scrollSpeedFactor.Value = 1;
         State = GameState.playing;
     }
 

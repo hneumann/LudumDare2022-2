@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class EnvironmentController : MonoBehaviour
 {
+    [Inject] private GameController gameController;
+
     [SerializeField] private float tileSpeed = 1;
     [SerializeField] private Transform prefab;
     [SerializeField] private bool useWidthOverride;
     [SerializeField] private float overrideWidth;
-    
 
+    private float actualTileSpeed = 1;
     private List<Transform> floorTiles = new List<Transform>(); 
     private float tileWidth;
+ 
+    private float startTime;
+ 
  
     void Awake()
     {
@@ -36,13 +42,17 @@ public class EnvironmentController : MonoBehaviour
 
     private void Start()
     {
+        gameController.ScrollSpeedFactor.Subscribe(factor => actualTileSpeed = factor * tileSpeed).AddTo(this);
+        gameController.ScrollSpeedFactor.Where(f => Mathf.Approximately(f, 1))
+            .Take(1)
+            .Subscribe(_ => startTime = Time.time);
         Observable.EveryUpdate().Subscribe(_ => MyUpdate()).AddTo(this);
     }
 
 
     void MyUpdate()
     {
-        UpdatePositions(Time.time);
+        UpdatePositions(Time.time - startTime);
     }
 
     private void SetupTiles(float screenWidth)
@@ -78,7 +88,7 @@ public class EnvironmentController : MonoBehaviour
         {
             var tile = floorTiles[i];
 
-            var verticalPosition = tileWidth * i + time * tileSpeed;
+            var verticalPosition = tileWidth * i + time * actualTileSpeed;
             verticalPosition = verticalPosition % (totalWidth) * -1f;
             verticalPosition += (totalWidth / 2);
 

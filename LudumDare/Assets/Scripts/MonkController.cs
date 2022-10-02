@@ -1,34 +1,39 @@
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class MonkController : MonoBehaviour
 {
+    [Inject] private GravityController gravityController;
+    
     [SerializeField] private GameObject idleMonks;
     [SerializeField] private GameObject inMonks;
     [SerializeField] private GameObject outMonks;
 
     void Start()
     {
-        outMonks.SetActive(true);
-        idleMonks.SetActive(false);
+        outMonks.SetActive(false);
+        idleMonks.SetActive(true);
         inMonks.SetActive(false);
+
+        gravityController.TimeInCycle.Subscribe(SetMonks).AddTo(this);
     }
 
-    //TODO switch monks really correctly
-    private void Update()
+    private void SetMonks(float time)
     {
-        var ones = Mathf.RoundToInt(Time.time) % 10;
-
-        if (ones % 5 is 0 or 5)
+        time = Mathf.RoundToInt(time * 10);
+        
+        if (time % 10 is 0 or 5)
         {
-            idleMonks.SetActive(false);
+            idleMonks.SetActive(true);
             outMonks.SetActive(false);
-            inMonks.SetActive(true);
+            inMonks.SetActive(false);
             return;
         }
 
         idleMonks.SetActive(false);
-        inMonks.SetActive(ones > 5);
-        outMonks.SetActive(ones < 5);
+        inMonks.SetActive(time > 5);
+        outMonks.SetActive(time < 5);
         
     }
     
