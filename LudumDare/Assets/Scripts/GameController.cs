@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour
     private void SpawnFlower () {
         _flowerSpawnTimer = _flowerSpawnTime + UnityEngine.Random.Range(-_flowerSpawnTimeRangeModifier, _flowerSpawnTimeRangeModifier);
         GameObject newFlower = Instantiate(flowerPrefabs[UnityEngine.Random.Range(0, flowerPrefabs.Count)]);
-        newFlower.transform.localPosition = new Vector3(10f, UnityEngine.Random.Range(-7f, -4f), newFlower.transform.localPosition.z);
+        newFlower.transform.localPosition = new Vector3(10f, UnityEngine.Random.Range(-7f, -5f), newFlower.transform.localPosition.z);
     }
 
     private void SpawnShop() {
