@@ -29,6 +29,7 @@ public class BumblebeeController : MonoBehaviour
 
     [Header("Score")]
     private int _pollenCount = 0;
+    private int _totalPollenCount = 0;
 
     private void Awake () {
         Reset();
@@ -112,7 +113,8 @@ public class BumblebeeController : MonoBehaviour
             int pollenThisFrame = hitObject.GetComponentInParent<Flower>().Harvest();
             if (pollenThisFrame >= 1) {
                 _pollenCount += pollenThisFrame;
-                SpawnPollen(pollenThisFrame);
+                _totalPollenCount += pollenThisFrame;
+                SpawnPollen(pollenThisFrame); //Adding Pollen Images to BumblebeeLegs
             }
         }
     }
@@ -130,6 +132,7 @@ public class BumblebeeController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision) { }
 
     public int PollenCount => _pollenCount;
+    public int TotalPollenCount => _totalPollenCount;
     public void BuyUpgrade(int price) {
         _pollenCount -= price;
         AdjustPollen();
@@ -158,6 +161,9 @@ public class BumblebeeController : MonoBehaviour
     }
 
     public void Reset () {
+        _pollenCount = 0;
+        _totalPollenCount = 0;
+        AdjustPollen();
         ResetUpgrades();
         transform.GetComponent<BoxCollider2D>().enabled = true;
         transform.parent = null;

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ed3b3b0bc84a04cb45a5d8370ba19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hudController: {fileID: 0}
   _cycleTime: 10
   _grativyIncreasePerCycle: 0.13
   flowerPrefabs:
@@ -52,5 +53,6 @@ MonoBehaviour:
   - {fileID: 7351572451046892645, guid: 03c185349e8241748985ef5758e3008f, type: 3}
   _flowerSpawnTime: 10
   _flowerSpawnTimeRangeModifier: 2
-  _shopPrefab: {fileID: 0}
-  _shopSpawnTime: 0
+  flowers: []
+  _shopPrefab: {fileID: 6222984065340730710, guid: 64adf4289bde4464e8d55e73c9cf0a9e, type: 3}
+  _shopSpawnTime: 20

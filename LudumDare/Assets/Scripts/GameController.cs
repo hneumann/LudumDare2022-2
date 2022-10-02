@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
         gameOver
     }
     private GameState _state;
+    [SerializeField] private HUDController _hudController;
     
     [SerializeField] private float _cycleTime;
     [SerializeField] private float _grativyIncreasePerCycle;
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float _flowerSpawnTime;
     [SerializeField] private float _flowerSpawnTimeRangeModifier;
     [SerializeField] private List<GameObject> flowers = new List<GameObject>();
+    [SerializeField] private List<GameObject> shops = new List<GameObject>();
     private float _flowerSpawnTimer;
 
     [Header("Shop")]
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
         _shopSpawnTimer = _shopSpawnTime;
         // StartGame();
         State = GameState.idle;
+        _hudController.CloseGameOverScreen();
     }
 
     // Update is called once per frame
@@ -85,6 +88,7 @@ public class GameController : MonoBehaviour
         _shopSpawnTimer = _shopSpawnTime;
         GameObject shop = Instantiate(_shopPrefab);
         shop.transform.localPosition = new Vector3(12f, shop.transform.localPosition.y, shop.transform.localPosition.z);
+        shops.Add(shop);
     }
 
     public GameState GetState() {
@@ -119,23 +123,35 @@ public class GameController : MonoBehaviour
 
     public void StartGame () {
         scrollSpeedFactor.Value = 1;
-        //Remove Flowers
-        for (int i = 0; i < flowers.Count; i++) {
-            Destroy(flowers[i]);
-        }
-        flowers.Clear();
+        ClearScene();
         ResetValues();
+        player.Reset();
+        _hudController.CloseGameOverScreen();
         State = GameState.playing;
     }
 
     public void ResetValues() {
         _flowerSpawnTimer = _flowerSpawnTime;
         _shopSpawnTimer = _shopSpawnTime;
-        player.Reset();
+        _cycleCount = 0;
         Upgrades.Instance.Reset();
     }
+    public void ClearScene() {
+        //Remove Flowers
+        for (int i = 0; i < flowers.Count; i++) {
+            Destroy(flowers[i]);
+        }
+        flowers.Clear();
+        //Remove Shops
+        for (int i = 0; i < shops.Count; i++) {
+            Destroy(shops[i]);
+        }
+        shops.Clear();
+    }
+
     public void GameOver () {
         State = GameState.gameOver;
+        _hudController.OpenGameOverScreen();
         shopUI.gameObject.SetActive(false);
     }
 
