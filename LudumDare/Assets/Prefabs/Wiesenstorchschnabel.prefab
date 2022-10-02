@@ -169,6 +169,12 @@ MonoBehaviour:
   harvestTimeRequired: 1
   _nectarPerHarvest: 2
   _movementSpeed: 1.5
+  pollenAnchors: []
+  pollen: []
+  pollenPrefabs:
+  - {fileID: 635054768668185700, guid: 896161365c861b64caa2cbd9bbaf2620, type: 3}
+  - {fileID: 8248861349212246272, guid: 424227073d00a7b45a0e61c91c3f2620, type: 3}
+  pollenSpawnOffsetRange: 0.5
 --- !u!114 &-6765598514656866653
 MonoBehaviour:
   m_ObjectHideFlags: 0

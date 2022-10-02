@@ -15,6 +15,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glockenblume
       objectReference: {fileID: 0}
+    - target: {fileID: 6921750305575483638, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+      propertyPath: pollenSpawnOffsetRange
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921750305575483638, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+      propertyPath: pollenAnchors.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921750305575483638, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+      propertyPath: pollenPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921750305575483638, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+      propertyPath: pollenAnchors.Array.data[0]
+      value: 
+      objectReference: {fileID: 7821287641597950909}
     - target: {fileID: 6921750305575483639, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -49,3 +65,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+--- !u!4 &7821287641597950909 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8403316957304142857, guid: ead16c42205936f4fa2b6e15d3346bbc, type: 3}
+  m_PrefabInstance: {fileID: 1735116846588757940}
+  m_PrefabAsset: {fileID: 0}

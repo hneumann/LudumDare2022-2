@@ -104,6 +104,12 @@ public class BumblebeeController : MonoBehaviour
             collision.transform.parent.DOMoveX(-30, 40);
             gameController.StartGame();
         }
+
+        if (collision.gameObject.tag == "Flower")
+        {
+            Debug.Log("start");
+            collision.gameObject.GetComponentInParent<Flower>().StartAnimation();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -129,7 +135,15 @@ public class BumblebeeController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) { }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Flower")
+        {
+            Debug.Log("stop");
+
+            collision.gameObject.GetComponentInParent<Flower>().StopAnimation();
+        }
+    }
 
     public int PollenCount => _pollenCount;
     public int TotalPollenCount => _totalPollenCount;
@@ -141,6 +155,7 @@ public class BumblebeeController : MonoBehaviour
     public void FloatingPollenCollected()
     {
         _pollenCount += 1;
+        _totalPollenCount += 1;
         SpawnPollen(1);
     }
 
