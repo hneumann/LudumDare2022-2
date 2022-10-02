@@ -19,7 +19,8 @@ public class EnvironmentController : MonoBehaviour
     private List<Transform> floorTiles = new List<Transform>(); 
     private float tileWidth;
  
-    private float startTime;
+    // This is pretty hacky but works...
+    private static float startTime;
  
  
     void Awake()
@@ -46,7 +47,8 @@ public class EnvironmentController : MonoBehaviour
         gameController.ScrollSpeedFactor.Subscribe(factor => actualTileSpeed = factor * tileSpeed).AddTo(this);
         gameController.ScrollSpeedFactor.Where(f => Mathf.Approximately(f, 1))
             .Take(1)
-            .Subscribe(_ => startTime = Time.time);
+            .Where(_ => startTime == 0)
+            .Subscribe(_ => startTime = Time.time).AddTo(this);
         Observable.EveryUpdate().Subscribe(_ => MyUpdate()).AddTo(this);
     }
 
