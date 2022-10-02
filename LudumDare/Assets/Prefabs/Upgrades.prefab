@@ -46,12 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseForceMultiplier: 0.1
   _priceIncreasePerLevel: 0
-  VerticalForceUpgradeSprite: {fileID: 21300000, guid: 0392b8ca088dd1940a2ad76300816ee3, type: 3}
-  VerticalForceUpgradeSpriteSecondary: {fileID: 21300000, guid: 92b5d30a5d7e36c4ea81e5f134640c73, type: 3}
+  VerticalForceUpgradeSprite: {fileID: 21300000, guid: 045d7180930c5e847a094d3b0b75c4c6, type: 3}
+  VerticalForceUpgradeSpriteSecondary: {fileID: 21300000, guid: 045d7180930c5e847a094d3b0b75c4c6, type: 3}
   verticalForceUpgradeBasePrice: 35
   VerticalForceLevel: 1
-  HorizontalForceUpgradeSprite: {fileID: 21300000, guid: f65717fd4b6f6fa4b8c433b27188df86, type: 3}
-  HorizontalForceUpgradeSpriteSecondary: {fileID: 21300000, guid: cf2cb99606848b74eade25806f1a7c84, type: 3}
+  HorizontalForceUpgradeSprite: {fileID: 21300000, guid: dc3120f50fc68334e934327db5456313, type: 3}
+  HorizontalForceUpgradeSpriteSecondary: {fileID: 21300000, guid: dc3120f50fc68334e934327db5456313, type: 3}
   horizontalForceUpgradeBasePrice: 25
   HorizontalForceLevel: 1
   HarvestSpeedUpgradeSprite: {fileID: 21300000, guid: 92b5d30a5d7e36c4ea81e5f134640c73, type: 3}
@@ -62,3 +62,8 @@ MonoBehaviour:
   BonusHarvestUpgradeSpriteSecondary: {fileID: 0}
   bonusHarvestUpgradeBasePrice: 40
   BonusHarvestLevel: 0
+  FloatingPollenIntervallUpgradeSprite: {fileID: 0}
+  FloatingPollenIntervallUpgradeSpriteSecondary: {fileID: 0}
+  FloatingPollenIntervallUpgradeBasePrice: 30
+  FloatingPollenIntervallUpgradeLevel:
+    value: 0

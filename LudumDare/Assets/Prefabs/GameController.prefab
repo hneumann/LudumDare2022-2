@@ -48,9 +48,9 @@ MonoBehaviour:
   _cycleTime: 10
   _grativyIncreasePerCycle: 0.13
   flowerPrefabs:
-  - {fileID: 1246573331238276832, guid: f246ceca4128c554180c2b2de018db72, type: 3}
-  - {fileID: 7179873520256054137, guid: 98252257903b2174196edd9abe1ad10c, type: 3}
-  - {fileID: 7351572451046892645, guid: 03c185349e8241748985ef5758e3008f, type: 3}
+  - {fileID: 8654406307148676933, guid: fb17f643a07550d4fa38560ece413113, type: 3}
+  - {fileID: 3813159613267427882, guid: 149a90539c779f04896c41d0799f69b7, type: 3}
+  - {fileID: 5038779068003563539, guid: ca2bb3e5961f01c469d89eba21128c65, type: 3}
   _flowerSpawnTime: 10
   _flowerSpawnTimeRangeModifier: 2
   flowers: []

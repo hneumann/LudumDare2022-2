@@ -138,6 +138,12 @@ public class BumblebeeController : MonoBehaviour
         AdjustPollen();
     }
 
+    public void FloatingPollenCollected()
+    {
+        _pollenCount += 1;
+        SpawnPollen(1);
+    }
+
     private void AdjustPollen() {
         int diff = pollen.Count - _pollenCount;
         for (int i = _pollenCount; i < pollen.Count; i++) {
