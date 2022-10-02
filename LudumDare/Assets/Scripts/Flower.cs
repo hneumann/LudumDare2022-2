@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +10,11 @@ public class Flower : MonoBehaviour
     [SerializeField] private float harvestTimeRequired;
     [SerializeField] private int _nectarPerHarvest;
     [SerializeField] private float _movementSpeed = 1f;
+    [SerializeField] private List<Transform> pollenAnchors;
+    [SerializeField] private List<GameObject> pollen;
     private float harvestTimer = 0;
+
+    private float _pollenSpawnRange = 0.05f;
 
     [Inject] private GameController gameController;
     
