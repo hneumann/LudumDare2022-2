@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +16,11 @@ public class BumblebeeController : MonoBehaviour
     [SerializeField] private float forceFactor;
     [SerializeField] private AnimationCurve forceFactorCurve;
     [SerializeField] private float maxVerticalVelocity;
+    
+    [SerializeField] private Transform pollenAnchor;
+    [SerializeField] private GameObject pollenPrefab;
+    private float pollenSpawnRange = 0.2f;
+    private List<GameObject> pollen = new List<GameObject>();
 
     // Upgrades
     private int _verticalForceUpgradeLevel = 0;
@@ -82,7 +89,6 @@ public class BumblebeeController : MonoBehaviour
         if (collision.gameObject.tag == "StartFlower" && gameController.GetState() == GameController.GameState.idle)
         {
             collision.transform.parent.DOMoveX(-30, 40);
-
             gameController.StartGame();
         }
     }
@@ -91,7 +97,21 @@ public class BumblebeeController : MonoBehaviour
     {
         GameObject hitObject = collision.gameObject;
         if (hitObject.tag == "Flower") {
-            _pollenCount += hitObject.GetComponentInParent<Flower>().Harvest();
+            int pollenThisFrame = hitObject.GetComponentInParent<Flower>().Harvest();
+            if (pollenThisFrame >= 1) {
+                _pollenCount += pollenThisFrame;
+                SpawnPollen(pollenThisFrame);
+            }
+        }
+    }
+
+    private void SpawnPollen ( int pollenThisFrame ) {
+        for(int i = 0; i <= pollenThisFrame; i++) {
+            int anchorID = UnityEngine.Random.Range(0, pollenAnchor.transform.childCount);
+            GameObject newPollen = Instantiate(pollenPrefab, pollenAnchor.GetChild(anchorID).transform);
+            newPollen.transform.localPosition = new Vector3(UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange), UnityEngine.Random.Range(-pollenSpawnRange, pollenSpawnRange), -0.02f);
+            newPollen.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            pollen.Add(newPollen);
         }
     }
 
