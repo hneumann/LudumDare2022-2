@@ -19,7 +19,7 @@ public class BumblebeeController : MonoBehaviour
     
     [SerializeField] private Transform pollenAnchor;
     [SerializeField] private GameObject pollenPrefab;
-    private float pollenSpawnRange = 0.2f;
+    private float pollenSpawnRange = 0.3f;
     private List<GameObject> pollen = new List<GameObject>();
 
     // Upgrades
@@ -120,6 +120,15 @@ public class BumblebeeController : MonoBehaviour
     public int PollenCount => _pollenCount;
     public void BuyUpgrade(int price) {
         _pollenCount -= price;
+        AdjustPollen();
+    }
+
+    private void AdjustPollen() {
+        int diff = pollen.Count - _pollenCount;
+        for (int i = _pollenCount; i < pollen.Count; i++) {
+            Destroy(pollen[i]);
+        }
+        pollen.RemoveRange(_pollenCount - 1, diff);
     }
 
     public int VerticalForceUpgradeLevel {
