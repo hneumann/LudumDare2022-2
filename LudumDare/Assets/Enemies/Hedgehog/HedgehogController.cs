@@ -10,12 +10,14 @@ public class HedgehogController : MonoBehaviour
 {
     [Inject] private InvisibleWalls invisibleWalls;
     [Inject] private GameController gameController;
+    [Inject] private BumblebeeController player;
 
     [SerializeField] private Transform jaw;
     [SerializeField] private float maxJawAngle;
     [SerializeField] private float animationSpeed;
     [SerializeField] private float biteDuration;
     [SerializeField] private Vector3 biteAnimationStartOffset;
+    [SerializeField] private Transform mäulchenAnchor;
 
     private CancellationTokenSource cancellationTokenSource = new();
     private float animationStartTime;
@@ -40,6 +42,14 @@ public class HedgehogController : MonoBehaviour
         isBiting = true;
         var startPosition = screenPosition - biteAnimationStartOffset;
         BiteAtInternal(startPosition, screenPosition);
+    }
+    
+    private void OnCollisionEnter2D ( Collision2D collision ) {
+        if(collision.collider.gameObject.tag == "Player") {            
+            collision.collider.gameObject.transform.SetParent(mäulchenAnchor);
+            player.Die();
+            gameController.GameOver();
+        }
     }
 
     private async Task BiteAtInternal(Vector3 startPosition, Vector3 targetPosition)

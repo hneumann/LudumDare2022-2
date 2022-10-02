@@ -62,6 +62,7 @@ public class Upgrades : MonoBehaviour
         VerticalForceLevel = 0;
         HorizontalForceLevel = 0;
         HarvestSpeedLevel = 0;
+        BonusHarvestLevel = 0;
     }
 
     void Awake()

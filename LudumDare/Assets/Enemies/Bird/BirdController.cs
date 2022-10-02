@@ -7,10 +7,12 @@ public class BirdController : MonoBehaviour
 {
     [Inject] private InvisibleWalls invisibleWalls;
     [Inject] private GameController gameController;
+    [Inject] private BumblebeeController player;
 
     [SerializeField] private float targetXOffset;
     [SerializeField] private float targetYOffset;
     [SerializeField] private Vector3 lowestPointOffset;
+    [SerializeField] private Transform schnabelAnchor;
 
     private Tween lastTween;
     
@@ -36,5 +38,13 @@ public class BirdController : MonoBehaviour
         };
 
         lastTween = transform.DOPath(waypoints, 3, PathType.CatmullRom, PathMode.Sidescroller2D);
+    }
+
+    private void OnCollisionEnter2D ( Collision2D collision ) {
+        if(collision.collider.gameObject.tag == "Player") {            
+            collision.collider.gameObject.transform.SetParent(schnabelAnchor);
+            player.Die();
+            gameController.GameOver();
+        }
     }
 }
