@@ -15,20 +15,22 @@ public class Upgrades : MonoBehaviour
     }
 
     [SerializeField] private float BaseForceMultiplier; // BaseForceMultiplier should be 0.1f
+    [SerializeField] private int _priceIncreasePerLevel;
 
-    [SerializeField] private Sprite HorizontalForceUpgradeSprite;
+    [Header("VerticalFlightForce")]
     [SerializeField] private Sprite VerticalForceUpgradeSprite;
-    
-    [SerializeField] private Sprite HorizontalForceUpgradeSpriteSecondary;
     [SerializeField] private Sprite VerticalForceUpgradeSpriteSecondary;
-
-    public float ExtraHorizontalForce => HorizontalForceLevel * BaseForceMultiplier; 
-    public float ExtraVerticalForce => VerticalForceLevel * BaseForceMultiplier; 
-    
-
+    public int verticalForceUpgradeBasePrice;
     public int VerticalForceLevel;
+    public float ExtraVerticalForce => 1 + (VerticalForceLevel-1) * BaseForceMultiplier; 
+    
+    [Header("HorizontalFlightForce")]
+    [SerializeField] private Sprite HorizontalForceUpgradeSprite;
+    [SerializeField] private Sprite HorizontalForceUpgradeSpriteSecondary;
+    public int horizontalForceUpgradeBasePrice;
     public int HorizontalForceLevel;
-    // TODO moar upgrades
+    public float ExtraHorizontalForce => 1 + (HorizontalForceLevel-1) * BaseForceMultiplier; 
+
 
     public void Reset()
     {
@@ -75,7 +77,8 @@ public class Upgrades : MonoBehaviour
             spriteSecondary = VerticalForceUpgradeSpriteSecondary,
             onSelected = () => VerticalForceLevel += 1,
             currentLevel = VerticalForceLevel,
-            text = "Vertical Flight Power"
+            text = "Vertical Flight Power",
+            price = verticalForceUpgradeBasePrice + (VerticalForceLevel * _priceIncreasePerLevel)
         });
     }
 
@@ -86,7 +89,8 @@ public class Upgrades : MonoBehaviour
             spriteSecondary = HorizontalForceUpgradeSpriteSecondary,
             onSelected = () => HorizontalForceLevel += 1,
             currentLevel = HorizontalForceLevel,
-            text = "Horizontal Flight Power"
+            text = "Horizontal Flight Power",
+            price = horizontalForceUpgradeBasePrice + (HorizontalForceLevel * _priceIncreasePerLevel)
         });
     }
 
@@ -100,4 +104,5 @@ public class UpgradeOption
     public Action onSelected;
     public int currentLevel;
     public string text;
+    public int price;
 }

@@ -25,6 +25,6 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         _breathCycleCounter.GetComponent<TextMeshProUGUI>().text = gameController.CycleCount.ToString();
-        _nectarCounter.GetComponent<TextMeshProUGUI>().text = player.NectarCount.ToString();
+        _nectarCounter.GetComponent<TextMeshProUGUI>().text = player.PollenCount.ToString();
     }
 }

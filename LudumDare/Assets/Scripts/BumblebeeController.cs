@@ -20,7 +20,7 @@ public class BumblebeeController : MonoBehaviour
     private int _horizontalForceUpgradeLevel = 0;
 
     [Header("Score")]
-    private int _nectarCount = 0;
+    private int _pollenCount = 0;
 
     void Update()
     {
@@ -51,11 +51,9 @@ public class BumblebeeController : MonoBehaviour
             } else {
                 verticalForce = verticalValue * forceFactor ;
                 horizontalForce = horizontalValue * forceFactor;
-                Debug.Log("verticalForce: " + verticalForce);
                 //Applying additional force from Upgrades
-                //verticalForce *= Upgrades.Instance.ExtraVerticalForce;
-                Debug.Log("with upgrade verticalForce: " + verticalForce);
-                //horizontalForce *= Upgrades.Instance.ExtraHorizontalForce;
+                verticalForce *= Upgrades.Instance.ExtraVerticalForce;
+                horizontalForce *= Upgrades.Instance.ExtraHorizontalForce;
             }
 
             var force = Vector2.up * verticalForce + Vector2.right * horizontalForce;
@@ -72,7 +70,7 @@ public class BumblebeeController : MonoBehaviour
     private void OnTriggerStay2D (Collider2D collision) {
         GameObject hitObject = collision.gameObject;
         if(hitObject.tag == "Flower") {
-            _nectarCount += hitObject.GetComponentInParent<Flower>().Harvest();
+            _pollenCount += hitObject.GetComponentInParent<Flower>().Harvest();
         }
     }
 
@@ -80,7 +78,11 @@ public class BumblebeeController : MonoBehaviour
         
     }
 
-    public int NectarCount => _nectarCount;
+    public int PollenCount => _pollenCount;
+    public void BuyUpgrade(int price) {
+        _pollenCount -= price;
+    }
+
     public int VerticalForceUpgradeLevel {
         get { return _verticalForceUpgradeLevel; }
         set { _verticalForceUpgradeLevel = value; }
@@ -95,7 +97,7 @@ public class BumblebeeController : MonoBehaviour
     }
 
     private void ResetUpgrades() {
-        _horizontalForceUpgradeLevel = 0;
-        _verticalForceUpgradeLevel = 0;
+        _horizontalForceUpgradeLevel = 1;
+        _verticalForceUpgradeLevel = 1;
     }
 }
