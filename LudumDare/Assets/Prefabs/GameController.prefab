@@ -51,8 +51,9 @@ MonoBehaviour:
   - {fileID: 8654406307148676933, guid: fb17f643a07550d4fa38560ece413113, type: 3}
   - {fileID: 3813159613267427882, guid: 149a90539c779f04896c41d0799f69b7, type: 3}
   - {fileID: 5038779068003563539, guid: ca2bb3e5961f01c469d89eba21128c65, type: 3}
-  _flowerSpawnTime: 10
+  _flowerSpawnTime: 8
   _flowerSpawnTimeRangeModifier: 2
   flowers: []
+  shops: []
   _shopPrefab: {fileID: 6222984065340730710, guid: 64adf4289bde4464e8d55e73c9cf0a9e, type: 3}
-  _shopSpawnTime: 20
+  _shopSpawnTime: 30
