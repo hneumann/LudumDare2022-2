@@ -13,7 +13,8 @@ public class GameController : MonoBehaviour
     {
         playing,
         shopping,
-        idle
+        idle,
+        gameOver
     }
     private GameState _state;
     
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<GameObject> flowerPrefabs;
     [SerializeField] private float _flowerSpawnTime;
     [SerializeField] private float _flowerSpawnTimeRangeModifier;
+    [SerializeField] private List<GameObject> flowers = new List<GameObject>();
     private float _flowerSpawnTimer;
 
     [Header("Shop")]
@@ -71,16 +73,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+
     private void SpawnFlower () {
         _flowerSpawnTimer = _flowerSpawnTime + UnityEngine.Random.Range(-_flowerSpawnTimeRangeModifier, _flowerSpawnTimeRangeModifier);
         GameObject newFlower = Instantiate(flowerPrefabs[UnityEngine.Random.Range(0, flowerPrefabs.Count)]);
         newFlower.transform.localPosition = new Vector3(10f, UnityEngine.Random.Range(-7f, -4f), newFlower.transform.localPosition.z);
+        flowers.Add(newFlower);
     }
 
     private void SpawnShop() {
         _shopSpawnTimer = _shopSpawnTime;
         GameObject shop = Instantiate(_shopPrefab);
-        shop.transform.localPosition = new Vector3(10f, shop.transform.localPosition.y, shop.transform.localPosition.z);
+        shop.transform.localPosition = new Vector3(12f, shop.transform.localPosition.y, shop.transform.localPosition.z);
     }
 
     public GameState GetState() {
@@ -103,6 +107,9 @@ public class GameController : MonoBehaviour
                 case GameState.shopping:
                     Time.timeScale = 0.01f;
                     break;
+                case GameState.gameOver:
+                    Time.timeScale = 1f;
+                    break;
             }
         }
     }
@@ -110,10 +117,26 @@ public class GameController : MonoBehaviour
     public int CycleCount => _cycleCount;
     public float gravityIncreasePerCycle => _grativyIncreasePerCycle;
 
-    public void StartGame()
-    {
+    public void StartGame () {
         scrollSpeedFactor.Value = 1;
+        //Remove Flowers
+        for (int i = 0; i < flowers.Count; i++) {
+            Destroy(flowers[i]);
+        }
+        flowers.Clear();
+        ResetValues();
         State = GameState.playing;
+    }
+
+    public void ResetValues() {
+        _flowerSpawnTimer = _flowerSpawnTime;
+        _shopSpawnTimer = _shopSpawnTime;
+        player.Reset();
+        Upgrades.Instance.Reset();
+    }
+    public void GameOver () {
+        State = GameState.gameOver;
+        shopUI.gameObject.SetActive(false);
     }
 
     public void StartShopping(ShopObjectController shop) {

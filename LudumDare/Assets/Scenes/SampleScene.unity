@@ -474,10 +474,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bumblebee
       objectReference: {fileID: 0}
-    - target: {fileID: 5255569673691457134, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
-      propertyPath: dragCoefficientPerPollen
-      value: 0.02
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ed73700f1d1f0146b1e7c2f22c6c262, type: 3}
 --- !u!114 &1295663630 stripped
@@ -862,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7529080942963223032, guid: 172599e8a4466e04aa666eb3b98ba120, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7529080942963223032, guid: 172599e8a4466e04aa666eb3b98ba120, type: 3}
       propertyPath: m_LocalRotation.w

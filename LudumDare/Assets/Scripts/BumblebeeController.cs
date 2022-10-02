@@ -30,6 +30,9 @@ public class BumblebeeController : MonoBehaviour
     [Header("Score")]
     private int _pollenCount = 0;
 
+    private void Awake () {
+        Reset();
+    }
     void Update()
     {
         if (gameController.GetState() is GameController.GameState.playing or GameController.GameState.idle)
@@ -149,12 +152,24 @@ public class BumblebeeController : MonoBehaviour
         set { _horizontalForceUpgradeLevel = value; }
     }
 
+    public void Die() {
+        transform.GetComponent<BoxCollider2D>().enabled = false;
+        this.transform.DOLocalMove(Vector3.zero, 0.3f); 
+    }
+
     public void Reset () {
         ResetUpgrades();
+        transform.GetComponent<BoxCollider2D>().enabled = true;
+        transform.parent = null;
+        
+    }
+
+    public void ResetPosition() {
+        transform.position = new Vector3(-4f, -2f, 0f);
     }
 
     private void ResetUpgrades() {
-        _horizontalForceUpgradeLevel = 1;
-        _verticalForceUpgradeLevel = 1;
+        _horizontalForceUpgradeLevel = 0;
+        _verticalForceUpgradeLevel = 0;
     }
 }
