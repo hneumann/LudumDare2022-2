@@ -43,8 +43,6 @@ public class MonkController : MonoBehaviour
 
     private void SpawnParticles(bool inParticlesActive)
     {
-        Debug.Log($"InParticles: {inParticlesActive}");
-
         var particlesToPlay = inParticlesActive ? particleSystemsIn : particleSystemsOut;
         var particlesToStop = inParticlesActive ? particleSystemsOut : particleSystemsIn;
 

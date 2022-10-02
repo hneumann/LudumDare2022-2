@@ -125,7 +125,6 @@ public class BumblebeeController : MonoBehaviour
 
         if (collision.gameObject.tag == "Flower")
         {
-            Debug.Log("start");
             collision.gameObject.GetComponentInParent<Flower>().StartAnimation();
         }
     }
@@ -166,8 +165,6 @@ public class BumblebeeController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Flower")
         {
-            Debug.Log("stop");
-
             collision.gameObject.GetComponentInParent<Flower>().StopAnimation();
         }
     }
