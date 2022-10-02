@@ -11,21 +11,31 @@ public class InvisibleWalls : MonoBehaviour
     [SerializeField] private BoxCollider2D left;
     [SerializeField] private BoxCollider2D right;
 
-    private ReactiveCommand<Vector2> targetCollideBottom = new ReactiveCommand<Vector2>();
+    private readonly ReactiveCommand<Vector2> targetCollideBottom = new ReactiveCommand<Vector2>();
     public IObservable<Vector2> TargetCollideBottom => targetCollideBottom;
+    
+    private readonly ReactiveCommand<Vector2> targetCollideCeiling = new ReactiveCommand<Vector2>();
+    public IObservable<Vector2> TargetCollideCeiling => targetCollideCeiling;
 
     // Start is called before the first frame update
     void Start()
     {
         SetToScreenSize();
 
-        floor.OnCollisionEnter2DAsObservable().Subscribe(OnCollide).AddTo(this);
+        floor.OnCollisionEnter2DAsObservable().Subscribe(OnCollideBottom).AddTo(this);
+        ceiling.OnCollisionEnter2DAsObservable().Subscribe(OnCollideCeiling).AddTo(this);
     }
 
-    private void OnCollide(Collision2D collision)
+    private void OnCollideBottom(Collision2D collision)
     {
         var meanPoint = collision.contacts.Select(c => c.point).Aggregate((vec1, vec2) => vec1 + vec2) / collision.contacts.Length;
         targetCollideBottom.Execute(meanPoint);
+    }
+    
+    private void OnCollideCeiling(Collision2D collision)
+    {
+        var meanPoint = collision.contacts.Select(c => c.point).Aggregate((vec1, vec2) => vec1 + vec2) / collision.contacts.Length;
+        targetCollideCeiling.Execute(meanPoint);
     }
     
     // Update is called once per frame
