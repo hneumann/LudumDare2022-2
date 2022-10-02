@@ -51,6 +51,7 @@ MonoBehaviour:
   animationSpeed: 50
   biteDuration: 0.7
   biteAnimationStartOffset: {x: -5, y: 3.5, z: 0}
+  isBiting: 0
 --- !u!1 &7529080943114401438
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +160,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529080944590225670}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9546239, w: 0.29781425}
   m_LocalPosition: {x: 3.71, y: 0.32, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -184,6 +184,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 471378046362200768}
     - target: {fileID: 2992234956887226110, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: hideAtStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992234956887226110, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: overrideWidth
       value: 13
       objectReference: {fileID: 0}
@@ -232,6 +236,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3127685040952669553, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: hideAtStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127685040952669553, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: overrideWidth
       value: 13
       objectReference: {fileID: 0}
@@ -240,6 +248,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 159051517795651858}
     - target: {fileID: 3258695730015014188, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: hideAtStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258695730015014188, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: overrideWidth
       value: 13
       objectReference: {fileID: 0}
@@ -247,6 +259,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 5965998573674609705}
+    - target: {fileID: 9063311821276864535, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
+      propertyPath: hideAtStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9063311821276864535, guid: 7e8ebaaae8b6673438862ce911c27219, type: 3}
       propertyPath: overrideWidth
       value: 13

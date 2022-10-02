@@ -6,7 +6,8 @@ using Zenject;
 public class BirdController : MonoBehaviour
 {
     [Inject] private InvisibleWalls invisibleWalls;
-    
+    [Inject] private GameController gameController;
+
     [SerializeField] private float targetXOffset;
     [SerializeField] private float targetYOffset;
     [SerializeField] private Vector3 lowestPointOffset;
@@ -15,7 +16,7 @@ public class BirdController : MonoBehaviour
     
     private void Start()
     {
-        invisibleWalls.TargetCollideCeiling.Subscribe(vec => DoDoTween(new Vector3(vec.x, vec.y, 0))).AddTo(this);
+        invisibleWalls.TargetCollideCeiling.Where(_ => gameController.GetState() == GameController.GameState.playing).Subscribe(vec => DoDoTween(new Vector3(vec.x, vec.y, 0))).AddTo(this);
     }
 
     private void DoDoTween(Vector3 targetPosition)

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class EnvironmentController : MonoBehaviour
 {
+    [Inject] private GameController gameController;
+
     [SerializeField] private float tileSpeed = 1;
     [SerializeField] private Transform prefab;
     [SerializeField] private bool useWidthOverride;
     [SerializeField] private float overrideWidth;
-    
+    [SerializeField] private bool hideAtStart;
 
+    private float actualTileSpeed = 1;
     private List<Transform> floorTiles = new List<Transform>(); 
     private float tileWidth;
+ 
+    private float startTime;
+ 
  
     void Awake()
     {
@@ -36,13 +43,17 @@ public class EnvironmentController : MonoBehaviour
 
     private void Start()
     {
+        gameController.ScrollSpeedFactor.Subscribe(factor => actualTileSpeed = factor * tileSpeed).AddTo(this);
+        gameController.ScrollSpeedFactor.Where(f => Mathf.Approximately(f, 1))
+            .Take(1)
+            .Subscribe(_ => startTime = Time.time);
         Observable.EveryUpdate().Subscribe(_ => MyUpdate()).AddTo(this);
     }
 
 
     void MyUpdate()
     {
-        UpdatePositions(Time.time);
+        UpdatePositions(Time.time - startTime);
     }
 
     private void SetupTiles(float screenWidth)
@@ -67,7 +78,14 @@ public class EnvironmentController : MonoBehaviour
         {
             floorTiles.Remove(floorTiles.Last());
         }
-
+        
+        if(hideAtStart)
+        {
+            for (var i = Mathf.RoundToInt(floorTiles.Count/2f); i < floorTiles.Count; i++)
+            {
+                floorTiles[i].gameObject.SetActive(false);
+            }
+        }
     }
     
     private void UpdatePositions(float time)
@@ -78,11 +96,16 @@ public class EnvironmentController : MonoBehaviour
         {
             var tile = floorTiles[i];
 
-            var verticalPosition = tileWidth * i + time * tileSpeed;
+            var verticalPosition = tileWidth * i + time * actualTileSpeed;
             verticalPosition = verticalPosition % (totalWidth) * -1f;
             verticalPosition += (totalWidth / 2);
 
             tile.transform.localPosition = Vector3.right * verticalPosition;
+
+            if (hideAtStart && verticalPosition > 15)
+            {
+                tile.gameObject.SetActive(true);
+            }
         }
     }
 }
