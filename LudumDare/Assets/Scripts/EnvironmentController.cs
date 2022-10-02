@@ -13,6 +13,7 @@ public class EnvironmentController : MonoBehaviour
     [SerializeField] private Transform prefab;
     [SerializeField] private bool useWidthOverride;
     [SerializeField] private float overrideWidth;
+    [SerializeField] private bool hideAtStart;
 
     private float actualTileSpeed = 1;
     private List<Transform> floorTiles = new List<Transform>(); 
@@ -77,7 +78,14 @@ public class EnvironmentController : MonoBehaviour
         {
             floorTiles.Remove(floorTiles.Last());
         }
-
+        
+        if(hideAtStart)
+        {
+            for (var i = Mathf.RoundToInt(floorTiles.Count/2f); i < floorTiles.Count; i++)
+            {
+                floorTiles[i].gameObject.SetActive(false);
+            }
+        }
     }
     
     private void UpdatePositions(float time)
@@ -93,6 +101,11 @@ public class EnvironmentController : MonoBehaviour
             verticalPosition += (totalWidth / 2);
 
             tile.transform.localPosition = Vector3.right * verticalPosition;
+
+            if (hideAtStart && verticalPosition > 15)
+            {
+                tile.gameObject.SetActive(true);
+            }
         }
     }
 }
