@@ -15,41 +15,35 @@ public class Upgrades : MonoBehaviour
     }
 
     [SerializeField] private float BaseForceMultiplier; // BaseForceMultiplier should be 0.1f
+    [SerializeField] private int _priceIncreasePerLevel;
 
-    [SerializeField] private Sprite HorizontalForceUpgradeSprite;
+    [Header("VerticalFlightForce")]
     [SerializeField] private Sprite VerticalForceUpgradeSprite;
-    
-    [SerializeField] private Sprite HorizontalForceUpgradeSpriteSecondary;
     [SerializeField] private Sprite VerticalForceUpgradeSpriteSecondary;
-
-    public float ExtraHorizontalForce => HorizontalForceLevel * BaseForceMultiplier; 
-    public float ExtraVerticalForce => VerticalForceLevel * BaseForceMultiplier; 
-    
-
+    public int verticalForceUpgradeBasePrice;
     public int VerticalForceLevel;
+    public float ExtraVerticalForce => 1 + (VerticalForceLevel-1) * BaseForceMultiplier; 
+    
+    [Header("HorizontalFlightForce")]
+    [SerializeField] private Sprite HorizontalForceUpgradeSprite;
+    [SerializeField] private Sprite HorizontalForceUpgradeSpriteSecondary;
+    public int horizontalForceUpgradeBasePrice;
     public int HorizontalForceLevel;
-    // TODO moar upgrades
+    public float ExtraHorizontalForce => 1 + (HorizontalForceLevel-1) * BaseForceMultiplier; 
+
+    [Header("PollenHarvestSpeed")]
+    [SerializeField] private Sprite HarvestSpeedUpgradeSprite;
+    [SerializeField] private Sprite HarvestSpeedUpgradeSpriteSecondary;
+    public int harvestSpeedUpgradeBasePrice;
+    public int HarvestSpeedLevel;
+    public float ExtraHarvestSpeed => 1 + (HarvestSpeedLevel-1) * BaseForceMultiplier; 
+
 
     public void Reset()
     {
         VerticalForceLevel = 1;
         HorizontalForceLevel = 1;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Reset();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            VerticalForceLevel++;
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            HorizontalForceLevel++;
-        }
+        HarvestSpeedLevel = 1;
     }
 
     void Awake()
@@ -62,7 +56,7 @@ public class Upgrades : MonoBehaviour
         var options = new List<UpgradeOption>();
         AddHorizontalForceOption(options);
         AddVerticalForceOption(options);
-        AddVerticalForceOption(options);
+        AddHarvestSpeedOption(options);
 
         Helper.Shuffle(options);
         return options.Take(3).ToList();
@@ -75,7 +69,8 @@ public class Upgrades : MonoBehaviour
             spriteSecondary = VerticalForceUpgradeSpriteSecondary,
             onSelected = () => VerticalForceLevel += 1,
             currentLevel = VerticalForceLevel,
-            text = "Vertical Flight Power"
+            text = "Vertical Flight Power",
+            price = verticalForceUpgradeBasePrice + (VerticalForceLevel * _priceIncreasePerLevel)
         });
     }
 
@@ -86,7 +81,20 @@ public class Upgrades : MonoBehaviour
             spriteSecondary = HorizontalForceUpgradeSpriteSecondary,
             onSelected = () => HorizontalForceLevel += 1,
             currentLevel = HorizontalForceLevel,
-            text = "Horizontal Flight Power"
+            text = "Horizontal Flight Power",
+            price = horizontalForceUpgradeBasePrice + (HorizontalForceLevel * _priceIncreasePerLevel)
+        });
+    }
+
+    private void AddHarvestSpeedOption(List<UpgradeOption> options)
+    {
+        options.Add(new UpgradeOption{
+            sprite = HarvestSpeedUpgradeSprite,
+            spriteSecondary = HarvestSpeedUpgradeSpriteSecondary,
+            onSelected = () => HarvestSpeedLevel += 1,
+            currentLevel = HarvestSpeedLevel,
+            text = "Harvest Speed Increase",
+            price = harvestSpeedUpgradeBasePrice + (HarvestSpeedLevel* _priceIncreasePerLevel)
         });
     }
 
@@ -100,4 +108,5 @@ public class UpgradeOption
     public Action onSelected;
     public int currentLevel;
     public string text;
+    public int price;
 }

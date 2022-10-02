@@ -13,19 +13,23 @@ public class Upgrade
 public class ShopController : MonoBehaviour
 {
     [Inject] private GameController _gameController;
+    [Inject] private BumblebeeController _player;
 
     [Header("Left Button")]    
     [SerializeField] private Button leftButton;
     [SerializeField] private Image leftButtonImage;
     [SerializeField] private TMPro.TMP_Text leftButtonText;
+    [SerializeField] private TMPro.TMP_Text leftPrice;
     [Header("Center Button")]    
     [SerializeField] private Button centerButton;
     [SerializeField] private Image centerButtonImage;
     [SerializeField] private TMPro.TMP_Text centerButtonText;
+    [SerializeField] private TMPro.TMP_Text centerPrice;
     [Header("Right Button")]    
     [SerializeField] private Button rightButton;
     [SerializeField] private Image rightButtonImage;
     [SerializeField] private TMPro.TMP_Text rightButtonText;
+    [SerializeField] private TMPro.TMP_Text rightPrice;
 
     // Start is called before the first frame update
     void Start()
@@ -45,27 +49,37 @@ public class ShopController : MonoBehaviour
 
     private void OpenShopScreen(List<UpgradeOption> options)
     {
-        SetupButton(leftButton, leftButtonImage, leftButtonText, options[0]);
-        SetupButton(centerButton, centerButtonImage, centerButtonText, options[1]);
-        SetupButton(rightButton, rightButtonImage, rightButtonText, options[2]);
+        SetupButton(leftButton, leftButtonImage, leftButtonText, leftPrice, options[0]);
+        SetupButton(centerButton, centerButtonImage, centerButtonText, centerPrice, options[1]);
+        SetupButton(rightButton, rightButtonImage, rightButtonText, rightPrice, options[2]);
     }
 
-    private void SetupButton(Button button, Image image, TMPro.TMP_Text text, UpgradeOption option)
+    private void SetupButton(Button button, Image image, TMPro.TMP_Text text, TMPro.TMP_Text price, UpgradeOption option)
     {
         //ButtonAnimation(button.gameObject);
         image.sprite = option.sprite;
         text.text = option.text;
-        button.onClick.AddListener(() => OnButtonClicked(option));
-        button.onClick.AddListener(CloseShop);
+        price.text = option.price.ToString();
+        if(_player.PollenCount >= option.price) {
+            button.interactable = true;
+            button.onClick.AddListener(() => OnButtonClicked(option));
+            button.onClick.AddListener(CloseShop);
+        } else {
+            button.interactable = false;
+        }
     }
     
     private void OnButtonClicked(UpgradeOption option)
     {
-        option.onSelected();
-        /*var icon = Instantiate(skillLearnedPrefab, null, true);
-        icon.GetComponent<UpgradeIcon>().SetSprite(option.spriteSecondary);
-        icon.transform.SetParent(skillLearnedParent);
-        selectedUpgrades.Add(icon); */
+        if(_player.PollenCount >= option.price) {
+            _player.BuyUpgrade(option.price);
+            option.onSelected();
+            // happy shopkeeper noises
+
+        } else {
+            // nicht genug Pollen
+            // Sad shopkeeper noises
+        }
     }
 
     public void OpenShop() {
@@ -74,7 +88,7 @@ public class ShopController : MonoBehaviour
         OpenShopScreen(options);
     }
 
-    private void CloseShop()
+    public void CloseShop()
     {
         this.gameObject.SetActive(false);
 
