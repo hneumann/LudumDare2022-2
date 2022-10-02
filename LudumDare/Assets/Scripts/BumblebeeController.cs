@@ -6,7 +6,9 @@ using Zenject;
 
 public class BumblebeeController : MonoBehaviour
 {
-    [Header("References")] [Inject] private GameController gameController;
+    [Header("References")] 
+    [Inject] private GameController gameController;
+    [Inject] private SoundController soundController;
 
     [Header("Controls")] [SerializeField] private Rigidbody2D rigidbody;
 
@@ -33,6 +35,7 @@ public class BumblebeeController : MonoBehaviour
 
     private void Awake () {
         Reset();
+        
     }
     void Update()
     {
@@ -141,6 +144,7 @@ public class BumblebeeController : MonoBehaviour
     public void FloatingPollenCollected()
     {
         _pollenCount += 1;
+        _totalPollenCount += 1;
         SpawnPollen(1);
     }
 
@@ -163,7 +167,8 @@ public class BumblebeeController : MonoBehaviour
 
     public void Die() {
         transform.GetComponent<BoxCollider2D>().enabled = false;
-        this.transform.DOLocalMove(Vector3.zero, 0.3f); 
+        this.transform.DOLocalMove(Vector3.zero, 0.3f);
+        soundController.StopFlyingSound();
     }
 
     public void Reset () {
@@ -173,7 +178,7 @@ public class BumblebeeController : MonoBehaviour
         ResetUpgrades();
         transform.GetComponent<BoxCollider2D>().enabled = true;
         transform.parent = null;
-        
+        soundController.PlayFlyingSound();
     }
 
     public void ResetPosition() {
