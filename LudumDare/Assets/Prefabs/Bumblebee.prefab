@@ -611,7 +611,7 @@ MonoBehaviour:
   rigidbody: {fileID: 5255569673691457122}
   useForceCurve: 0
   forceFactor: 8
-  dragCoefficientPerPollen: 0.02
+  dragCoefficientPerPollen: 0.015
   forceFactorCurve:
     serializedVersion: 2
     m_Curve: []

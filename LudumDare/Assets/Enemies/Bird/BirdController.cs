@@ -8,6 +8,7 @@ public class BirdController : MonoBehaviour
     [Inject] private InvisibleWalls invisibleWalls;
     [Inject] private GameController gameController;
     [Inject] private BumblebeeController player;
+    [Inject] private SoundController soundController;
 
     [SerializeField] private float targetXOffset;
     [SerializeField] private float targetYOffset;
@@ -37,7 +38,13 @@ public class BirdController : MonoBehaviour
             new Vector3(targetPosition.x + targetXOffset, targetPosition.y + targetYOffset, 0),
         };
 
-        lastTween = transform.DOPath(waypoints, 3, PathType.CatmullRom, PathMode.Sidescroller2D);
+        lastTween = transform.DOPath(waypoints, 3, PathType.CatmullRom, PathMode.Sidescroller2D).OnWaypointChange(WaypointCallback);
+    }
+
+    void WaypointCallback(int waypointIndex) {
+        if(waypointIndex == 2) {
+            soundController.PlayBirdSound();
+        }
     }
 
     private void OnCollisionEnter2D ( Collision2D collision ) {
