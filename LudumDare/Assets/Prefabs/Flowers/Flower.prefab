@@ -300,7 +300,7 @@ MonoBehaviour:
   _currentYield: 0
   harvestTimeRequired: 1
   _nectarPerHarvest: 0
-  _movementSpeed: 1
+  _movementSpeed: 1.5
   pollenAnchors: []
   pollen: []
   pollenPrefabs:

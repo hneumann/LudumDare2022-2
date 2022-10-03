@@ -48,10 +48,10 @@ public class SoundController : MonoBehaviour
                 _musicOutput = Instantiate(_audioOutputPrefab);
                 _musicOutput.transform.SetParent(this.transform);
                 _musicOutput.GetComponent<AudioSource>().clip = _backgroundMusic;
-                _musicOutput.GetComponent<AudioSource>().Play();
                 _musicOutput.GetComponent<AudioSource>().loop = true;
                 _musicOutput.GetComponent<AudioSource>().volume = 0.5f;
             }
+                _musicOutput.GetComponent<AudioSource>().Play();
         } else {
             if (_musicOutput != null) {
                 _musicOutput.GetComponent<AudioSource>().Stop();

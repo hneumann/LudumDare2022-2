@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseForceMultiplier: 0.1
-  _priceIncreasePerLevel: 0
+  _priceIncreasePerLevel: 5
   VerticalForceUpgradeSprite: {fileID: 21300000, guid: 045d7180930c5e847a094d3b0b75c4c6, type: 3}
   VerticalForceUpgradeSpriteSecondary: {fileID: 21300000, guid: 045d7180930c5e847a094d3b0b75c4c6, type: 3}
   verticalForceUpgradeBasePrice: 15
