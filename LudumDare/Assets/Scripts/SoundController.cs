@@ -37,10 +37,12 @@ public class SoundController : MonoBehaviour
         _muted = !_muted;
         if(_muted) {
             StopFlyingSound();
+            StopBackgroundMusic();
+
         } else {
             PlayFlyingSound();
-        }
         PlayBackgroundMusic();
+        }
         
     }
 
@@ -54,11 +56,13 @@ public class SoundController : MonoBehaviour
                 _musicOutput.GetComponent<AudioSource>().volume = 0.5f;
             }
                 _musicOutput.GetComponent<AudioSource>().Play();
-        } else {
-            if (_musicOutput != null) {
+        }
+    }
+
+    private void StopBackgroundMusic() {
+        if (_musicOutput != null) {
                 _musicOutput.GetComponent<AudioSource>().Stop();
             }
-        }
     }
 
     public void PlayFlyingSound() {
@@ -72,14 +76,16 @@ public class SoundController : MonoBehaviour
             }
             _flyingNoiseOutput.GetComponent<AudioSource>().Play();
         } else {
-            if (_flyingNoiseOutput == null) {
+            if (_flyingNoiseOutput != null) {
                 _flyingNoiseOutput.GetComponent<AudioSource>().Stop();
             }
         }
     }
 
     public void StopFlyingSound() {
-        _flyingNoiseOutput.GetComponent<AudioSource>().Stop();
+        if (_flyingNoiseOutput != null) {
+                _flyingNoiseOutput.GetComponent<AudioSource>().Stop();
+            }
     }
 
     public void PlayHedgehogSound() {
