@@ -141,6 +141,7 @@ public class BumblebeeController : MonoBehaviour
             {
                 _pollenCount += pollenThisFrame;
                 _totalPollenCount += pollenThisFrame;
+                soundController.PlayPollenSound();
                 SpawnPollen(pollenThisFrame); //Adding Pollen Images to BumblebeeLegs
             }
         }
@@ -176,12 +177,14 @@ public class BumblebeeController : MonoBehaviour
     {
         _pollenCount -= price;
         AdjustPollen();
+        soundController.PlayBuyingSound();
     }
 
     public void FloatingPollenCollected()
     {
         _pollenCount += 1;
         _totalPollenCount += 1;
+        soundController.PlayPollenSound();
         SpawnPollen(1);
     }
 
