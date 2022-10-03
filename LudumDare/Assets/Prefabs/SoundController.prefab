@@ -48,4 +48,6 @@ MonoBehaviour:
   _hedgehogMonch: {fileID: 8300000, guid: 21d6c8676dee3df4a84756d4e2ced289, type: 3}
   _birdMonch: {fileID: 8300000, guid: 83820c4d2c9cdbc409901d814c302420, type: 3}
   _flyingNoise: {fileID: 8300000, guid: f6e9f827c53eb4c4f89593473a12d09f, type: 3}
+  _getPollen: {fileID: 8300000, guid: b5d810687e17bd142a89477ab561b9a2, type: 3}
+  _buying: {fileID: 8300000, guid: 18277d90115d4604e951ae794211a15f, type: 3}
   _audioOutputPrefab: {fileID: 102116233001200481, guid: d99d2453d8875974785f65f50230fde0, type: 3}

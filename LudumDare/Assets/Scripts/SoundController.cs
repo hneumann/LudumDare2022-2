@@ -8,6 +8,8 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioClip _hedgehogMonch;
     [SerializeField] private AudioClip _birdMonch;
     [SerializeField] private AudioClip _flyingNoise;
+    [SerializeField] private AudioClip _getPollen;
+    [SerializeField] private AudioClip _buying;
     [SerializeField] private GameObject _audioOutputPrefab;
 
     private List<GameObject> audioOutputObjects = new List<GameObject>();
@@ -91,10 +93,23 @@ public class SoundController : MonoBehaviour
         }
     }
 
-    private GameObject PlaySound(AudioClip clip) {
+    public void PlayPollenSound() {
+        if(!_muted) {
+            PlaySound(_getPollen, 0.6f); 
+        }
+    }
+
+    public void PlayBuyingSound() {
+        if(!_muted) {
+            PlaySound(_buying); 
+        }
+    }
+    
+    private GameObject PlaySound ( AudioClip clip, float volume = 1f) {
         GameObject outputObject = Instantiate(_audioOutputPrefab);
         outputObject.transform.SetParent(this.transform);
         outputObject.GetComponent<AudioSource>().clip = clip;
+        outputObject.GetComponent<AudioSource>().volume = volume;
         outputObject.GetComponent<AudioSource>().Play();
         return outputObject;
     }
